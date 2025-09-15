@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
@@ -45,14 +46,62 @@ const ProjectShowcase = () => {
 
     //Max - 8 in 4
     const spotlightItems = [
-      { name: "Silent Arc", img: "/img-1.png" },
-      { name: "Bloom24", img: "/img-2.png" },
-      { name: "Glass Fade", img: "/img-3.png" },
-      { name: "Stilllroom", img: "/img-7.png" },
-      { name: "Echo 9", img: "/img-4.png" },
-      { name: "Mono 73", img: "/img-9.png" },
-      { name: "Echo 9", img: "/img-4.png" },
-      { name: "Mono 73", img: "/img-9.png" },
+      {
+        name: "Silent Arc",
+        img: "/img-1.png",
+        desc: "Description for Silent Arc",
+        liveUrl: "#",
+        gitUrl: "#",
+      },
+      {
+        name: "Bloom24",
+        img: "/img-2.png",
+        desc: "Description for Bloom24",
+        liveUrl: "#",
+        gitUrl: "#",
+      },
+      {
+        name: "Glass Fade",
+        img: "/img-3.png",
+        desc: "Description for Glass Fade",
+        liveUrl: "#",
+        gitUrl: "#",
+      },
+      {
+        name: "Stilllroom",
+        img: "/img-7.png",
+        desc: "Description for Stilllroom",
+        liveUrl: "#",
+        gitUrl: "#",
+      },
+      {
+        name: "Echo 9",
+        img: "/img-4.png",
+        desc: "Description for Echo 9",
+        liveUrl: "#",
+        gitUrl: "#",
+      },
+      {
+        name: "Mono 73",
+        img: "/img-9.png",
+        desc: "Description for Mono 73",
+        liveUrl: "#",
+        gitUrl: "#",
+      },
+      {
+        name: "Echo 9",
+        img: "/img-4.png",
+        desc: "Description for Echo 9",
+        liveUrl: "#",
+        gitUrl: "#",
+      },
+      {
+        name: "Mono 73",
+        img: "/img-9.png",
+        desc: "Description for Mono 73",
+        liveUrl: "#",
+        gitUrl: "#",
+      },
     ];
 
     const lenis = new Lenis();
@@ -225,7 +274,6 @@ const ProjectShowcase = () => {
           titleElement?.forEach((title, index) => {
             const titleRect = title.getBoundingClientRect();
             const titleCenter = titleRect.top + titleRect.height / 2;
-            titlesContainerHeight;
             const distanceFromCenter = Math.abs(titleCenter - viewportMiddle);
 
             if (distanceFromCenter < closestDistance) {
@@ -269,7 +317,7 @@ const ProjectShowcase = () => {
 
     /* ----------  MODAL HANDLERS  ---------- */
     const modal = document.getElementById("spotlight-modal");
-    const mTitle = modal?.querySelector(".spotlight-modal__title");
+    modal?.querySelector(".spotlight-modal__title");
     const mClose = modal?.querySelector(".spotlight-modal__close");
 
     /* open */
@@ -294,13 +342,9 @@ const ProjectShowcase = () => {
       if (modal)
         (
           modal.querySelector(".spotlight-modal__desc") as HTMLElement
-        ).textContent = (item as any).desc;
-      (modal?.querySelector(".live") as HTMLAnchorElement).href = (
-        item as any
-      ).liveUrl;
-      (modal?.querySelector(".git") as HTMLAnchorElement).href = (
-        item as any
-      ).gitUrl;
+        ).textContent = item.desc;
+      (modal?.querySelector(".live") as HTMLAnchorElement).href = item.liveUrl;
+      (modal?.querySelector(".git") as HTMLAnchorElement).href = item.gitUrl;
 
       modal?.classList.add("open");
       originalScrollFn.open();
@@ -331,16 +375,16 @@ const ProjectShowcase = () => {
     }
 
     /* ----------  HANDLE RESIZE  ---------- */
-    let resizeDebounce: any;
+    let resizeDebounce: NodeJS.Timeout;
     window.addEventListener("resize", () => {
       clearTimeout(resizeDebounce);
       resizeDebounce = setTimeout(() => {
         /* recompute the geometry that the scroll animation uses */
-        let containerHeight = window.innerHeight;
-        let containerWidth = window.innerWidth * 0.75;
-        let arcStartX = containerWidth - 220;
-        let arcControlPointX = arcStartX + config.arcRadius;
-        let arcControlPointY = containerHeight / 2;
+        const containerHeight = window.innerHeight;
+        const containerWidth = window.innerWidth * 0.75;
+        const arcStartX = containerWidth - 220;
+        const arcControlPointX = arcStartX + config.arcRadius;
+        const arcControlPointY = containerHeight / 2;
 
         /* let ScrollTrigger re-measure and re-pin */
         ScrollTrigger.refresh(true);
@@ -373,9 +417,11 @@ const ProjectShowcase = () => {
         </div>
 
         <div className="spotlight-bg-img">
-          <img
+          <Image
             src="https://images.pexels.com/photos/356056/pexels-photo-356056.jpeg"
             alt=""
+            width={1920}
+            height={1080}
           />
           <div className="spotlight-shade"></div>
         </div>
@@ -397,7 +443,13 @@ const ProjectShowcase = () => {
           ✕
         </button>
 
-        <img className="spotlight-modal__img" src="#" alt="" />
+        <Image
+          className="spotlight-modal__img"
+          src="#"
+          alt=""
+          width={500}
+          height={500}
+        />
         <h2 className="spotlight-modal__title"></h2>
         <p className="spotlight-modal__desc"></p>
 
