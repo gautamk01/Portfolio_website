@@ -8,18 +8,18 @@ const Preloader = () => {
     if (preloader) {
       setTimeout(() => {
         preloader.style.opacity = "0";
-        preloader.style.transition = "opacity 0.5s ease-out";
+        preloader.style.transition = "opacity 0.2s ease-out";
         setTimeout(() => {
           preloader.style.display = "none";
         }, 500);
-      }, 2000);
+      }, 1000);
     }
   }, []);
 
   return (
     <div id="preloader" className="preloader">
       <div className="preloader-content">
-        <h1>Gautam</h1>
+        <h1>Gautam Krishna M</h1>
         <p>Portfolio</p>
       </div>
     </div>

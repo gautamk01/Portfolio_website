@@ -72,7 +72,7 @@ const animateCounter = (counter, duration, delay = 0) => {
   });
 };
 
-function animateImages() {
+function animateImages(onComplete) {
   const images = document.querySelectorAll(".img");
   images.forEach((img) => {
     img.classList.remove("animate-out");
@@ -81,7 +81,7 @@ function animateImages() {
   const state = Flip.getState(images);
 
   images.forEach((img) => img.classList.add("animate-out"));
-  const mainTimeline = gsap.timeline();
+  const mainTimeline = gsap.timeline({ onComplete });
 
   mainTimeline.add(
     Flip.from(state, {
@@ -155,37 +155,55 @@ export const runAnimations = () => {
       duration: 0.3,
       ease: "power3.out",
       delay: 0.3,
-      onStart: animateImages,
-    })
-    .to(".main-nav", { opacity: 1, duration: 1, ease: "power3.inOut" }, "-=1")
-    .to(container.querySelector(".sidebar .divider"), {
-      scaleY: "100%",
-      duration: 1,
-      ease: "power3.inOut",
-      delay: 1.25,
-    })
-    .to(container.querySelectorAll(".main-nav .divider, .site-info .divider"), {
-      scaleX: "100%",
-      duration: 1,
-      stagger: 0.5,
-      ease: "power3.inOut",
-    })
-    .to(
-      container.querySelector(".logo"),
-      { scale: 1, duration: 1, ease: "power4.inOut" },
-      "<"
-    )
-    .to(
-      container.querySelectorAll(
-        ".logo-name a span, .links a span, .links p span, .cta a span"
-      ),
-      { y: "0%", duration: 1, stagger: 0.1, ease: "power4.out" }
-    )
-    .to(
-      container.querySelectorAll(
-        ".header span, .site-info span, .hero-footer span"
-      ),
-      { y: "0%", duration: 1, stagger: 0.1, ease: "power4.out" },
-      "<"
-    );
+      onStart: () => {
+        animateImages(() => {
+          const tl = gsap.timeline();
+          tl.to(".main-nav", {
+            opacity: 1,
+            duration: 1,
+            ease: "power3.inOut",
+          })
+            .to(
+              container.querySelector(".sidebar .divider"),
+              {
+                scaleY: "100%",
+                duration: 1,
+                ease: "power3.inOut",
+              },
+              "<"
+            )
+            .to(
+              container.querySelectorAll(
+                ".main-nav .divider, .site-info .divider"
+              ),
+              {
+                scaleX: "100%",
+                duration: 1,
+                stagger: 0.5,
+                ease: "power3.inOut",
+              },
+              "<"
+            )
+            .to(
+              container.querySelector(".logo"),
+              { scale: 1, duration: 1, ease: "power4.inOut" },
+              "<"
+            )
+            .to(
+              container.querySelectorAll(
+                ".logo-name a span, .links a span, .links p span, .cta a span"
+              ),
+              { y: "0%", duration: 1, stagger: 0.1, ease: "power4.out" },
+              "<"
+            )
+            .to(
+              container.querySelectorAll(
+                ".header span, .site-info span, .hero-footer span"
+              ),
+              { y: "0%", duration: 1, stagger: 0.1, ease: "power4.out" },
+              "<"
+            );
+        });
+      },
+    });
 };
