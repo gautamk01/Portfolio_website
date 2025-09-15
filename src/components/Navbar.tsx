@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import Link from "next/link";
+import Image from "next/image";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -91,7 +92,12 @@ const Navbar: React.FC = () => {
           <div className="menu-items">
             <div className="col-lg">
               <div className="menu-preview-img" ref={menuPreviewImgRef}>
-                <img src="/resume.webp" alt="resume" />
+                <Image
+                  src="/resume.webp"
+                  alt="resume"
+                  width={800}
+                  height={480}
+                />
               </div>
             </div>
             <div className="col-sm">

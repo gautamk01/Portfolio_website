@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 const AboutMe = () => {
   return (
@@ -16,7 +17,12 @@ const AboutMe = () => {
             </p>
           </div>
           <div className="portfolio-image-container">
-            <img src="/img-10.webp" alt="Abstract flowing art" />
+            <Image
+              src="/img-10.webp"
+              alt="Abstract flowing art"
+              width={800}
+              height={480}
+            />
           </div>
         </div>
       </div>

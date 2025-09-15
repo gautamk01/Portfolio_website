@@ -743,10 +743,12 @@ nav.main-nav.scrolled .divider {
   align-items: center;
   justify-content: center;
   padding: clamp(2rem, 5vh, 4rem) 1rem;
-  min-height: 100vh;
-  background-color: var(--loader-bg);
+  min-height: 100vh; /* Takes up at least a full screen */
+  background-color: var(--bg); /* Has a solid background */
   color: var(--fg);
   overflow-x: hidden;
+  position: relative; /* z-index needs this */
+  z-index: 1; /* Ensures it's above the sticky header's text */
 }
 
 /* --- UNIVERSALLY RESPONSIVE SECTION TITLE --- */
@@ -907,34 +909,39 @@ nav.main-nav.scrolled .divider {
 /* ===== STICKY CARD ANIMATION STYLES (from user example) ===== */
 .sticky-card-section {
   position: relative;
-  background-color: #ded8c8;
+  height: 100vh; /* Critical: Defines the section's boundary */
+  width: 100vw;
+  background-color: #ded8c8; /* Opaque background */
+  overflow: hidden; /* Prevents bleed-through */
 }
 
 .sticky-header {
   position: absolute;
   top: 0;
   left: 0;
-  width: 250vw;
+  width: 250vw; /* Restore original width for animation */
   height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   will-change: transform;
 }
 
 .sticky-header h1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
   margin: 0;
   color: #000;
-  font-size: 20vw;
-  font-weight: 200; /* lighter */
-  letter-spacing: -0.05em;
-  line-height: 100%;
+  font-size: 25vw; /* Increased font size */
+  font-weight: 400; /* Bolder font */
+  letter-spacing: -0.02em;
+  line-height: 1;
 }
 
 .card {
   position: absolute;
-  top: 10%;
-  left: 100%;
+  top: 15%; /* Adjusted for better vertical centering during animation */
+  left: 100%; /* Let GSAP control X */
   width: 350px;
   height: 500px;
   background-color: #000;
@@ -942,7 +949,7 @@ nav.main-nav.scrolled .divider {
   padding: 0.5em;
   will-change: transform;
   z-index: 2;
-  opacity: 0; /* Start hidden */
+  opacity: 0; /* Start hidden, as GSAP expects */
   display: flex;
   flex-direction: column;
 }

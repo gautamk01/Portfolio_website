@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 const images = [
   "/img-1.webp",
@@ -21,10 +22,12 @@ const ImageGrid: React.FC = () => {
           key={index}
           className="img absolute top-6 left-6 w-full md:w-1/5 aspect-[5/3] rounded-xl overflow-hidden"
         >
-          <img
+          <Image
             src={src}
             alt={`grid item ${index + 1}`}
             className="w-full h-full object-cover"
+            width={800}
+            height={480}
           />
         </div>
       ))}
