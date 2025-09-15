@@ -95,9 +95,6 @@ const ProjectShowcase = () => {
     window.addEventListener("wheel", (e) => e.deltaX && e.preventDefault(), {
       passive: false,
     });
-    window.addEventListener("touchmove", (e) => e.preventDefault(), {
-      passive: false,
-    });
 
     const config = {
       gap: 0.08,
