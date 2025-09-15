@@ -10,19 +10,35 @@ import SiteInfo from "../components/SiteInfo";
 import HeroFooter from "../components/HeroFooter";
 import { runAnimations } from "./animations";
 import Preloader from "../components/Preloader";
+import AboutMe from "../components/AboutMe";
+import Achievements from "../components/Achievements";
+import useSmoothScroll from "../hooks/useSmoothScroll";
 
 const Home: React.FC = () => {
+  useSmoothScroll();
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (loading) {
+      document.body.classList.add("loading");
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.classList.remove("loading");
+      document.body.style.overflow = "auto";
+    }
+  }, [loading]);
+
+  useEffect(() => {
+    if (!loading) {
+      runAnimations(() => {
+        // Optional: callback after animations complete
+      });
+    }
+  }, [loading]);
 
   useEffect(() => {
     setTimeout(() => setLoading(false), 1000);
   }, []);
-
-  useEffect(() => {
-    if (!loading) {
-      runAnimations();
-    }
-  }, [loading]);
 
   return (
     <>
@@ -40,7 +56,14 @@ const Home: React.FC = () => {
               <SiteInfo />
               <HeroFooter />
             </section>
+            <AboutMe />
           </div>
+          <Achievements />
+          <footer className="relative h-[50vh] w-full bg-black flex items-center justify-center">
+            <h2 className="text-3xl text-white font-medium">
+              Let's get in touch.
+            </h2>
+          </footer>
         </>
       )}
     </>

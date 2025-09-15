@@ -20,16 +20,13 @@ body {
   font-family: "PP Neue Montreal", "Inter", sans-serif;
   color: var(--fg);
   background-color: var(--bg);
-  overflow: hidden; /* Start with scroll disabled */
   transition: overflow 0.3s ease;
+  overflow-x: hidden;
 }
 
 /* Loading state - completely locked */
 body.loading {
-  overflow: hidden !important;
-  height: 100vh !important;
-  position: fixed !important;
-  width: 100% !important;
+  overflow: hidden;
 }
 
 /* After loading - enable scrolling */
@@ -102,7 +99,7 @@ nav.main-nav {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
+  width: 100%;
   height: 5rem;
   background: transparent;
   display: flex;
@@ -280,7 +277,7 @@ nav.main-nav.scrolled .divider {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
+  width: 100%;
   height: 100vh; /* Changed from 100svh for better mobile support */
   background-color: var(--menu-bg);
   z-index: 9;
@@ -295,7 +292,7 @@ nav.main-nav.scrolled .divider {
 /* Mobile-specific menu overlay fixes */
 @media (max-width: 768px) {
   .menu-overlay {
-    width: 100vw !important;
+    width: 100% !important;
     height: 100vh !important;
     height: 100dvh; /* Dynamic viewport height for mobile */
     left: 0 !important;
@@ -310,7 +307,7 @@ nav.main-nav.scrolled .divider {
 }
 .menu-overlay.open {
   position: fixed;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   top: 0;
   left: 0;
@@ -440,6 +437,7 @@ nav.main-nav.scrolled .divider {
   will-change: transform;
   transform-origin: right top;
   transition: transform 1.25s cubic-bezier(0.77, 0, 0.175, 1);
+  background-color: var(--loader-bg);
 }
 
 .container.menu-open {
@@ -448,7 +446,7 @@ nav.main-nav.scrolled .divider {
 
 .hero {
   position: relative;
-  width: 100vw;
+  width: 100%;
   height: 100svh;
   background-color: var(--bg);
   overflow: hidden;
@@ -734,4 +732,250 @@ nav.main-nav.scrolled .divider {
   .link a {
     font-size: 2.5rem;
   }
+}
+
+/* ===== PORTFOLIO ABOUT ME V6 (Final & Fully Responsive) ===== */
+
+/* --- Main Section Styling --- */
+.portfolio-about {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(2rem, 5vh, 4rem) 1rem;
+  min-height: 100vh;
+  background-color: var(--loader-bg);
+  color: var(--fg);
+  overflow-x: hidden;
+}
+
+/* --- UNIVERSALLY RESPONSIVE SECTION TITLE --- */
+.portfolio-profile-title {
+  /*
+  * THE FIX: This `clamp()` function makes the font size fluid.
+  * It sets a minimum size (2rem), a preferred size that scales with the screen width (8vw),
+  * and a maximum size (4.5rem). This works perfectly for all sections.
+  */
+  font-size: clamp(2rem, 8vw, 4.5rem);
+  font-weight: 500;
+  text-align: center;
+  color: var(--fg);
+  margin-bottom: clamp(1rem, 3vh, 2rem); /* Responsive bottom margin */
+}
+
+/* --- Content Container --- */
+.portfolio-copy-container {
+  border: 0.15rem dashed var(--stroke);
+  border-radius: 1.5rem;
+  padding: clamp(1rem, 4vw, 2.5rem);
+  width: 90%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- Content Wrapper (Mobile First) --- */
+.portfolio-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: clamp(1rem, 3vh, 2rem);
+}
+
+/* --- Image Container Styling --- */
+.portfolio-image-container {
+  order: 1;
+  width: clamp(120px, 40%, 220px);
+  aspect-ratio: 1 / 1;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+  will-change: clip-path;
+  clip-path: inset(100% 0 0 0);
+}
+
+.portfolio-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --- Animated Text Styling --- */
+.portfolio-anime-text {
+  order: 2;
+  width: 100%;
+}
+
+.portfolio-anime-text p {
+  font-weight: 500;
+  line-height: 1.6;
+  text-align: center;
+  font-size: clamp(0.85rem, 2.2vh, 1.1rem);
+}
+
+/* (Keyword styling is unchanged) */
+.portfolio-anime-text .word {
+  display: inline-block;
+  position: relative;
+  margin-right: 0.2rem;
+  margin-bottom: 0.2rem;
+  padding: 0.1rem 0.2rem;
+  border-radius: 2rem;
+  will-change: background-color, opacity;
+  opacity: 0;
+}
+.portfolio-anime-text .word.keyword-wrapper {
+  margin: 0 0.4rem 0.2rem;
+}
+.portfolio-anime-text .word span {
+  position: relative;
+}
+.portfolio-anime-text .word span.keyword {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  border-radius: 2rem;
+  padding: 0.1rem 0;
+  color: #141414;
+}
+.portfolio-anime-text .word span.keyword::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% + 1rem);
+  height: calc(100% + 0.4rem);
+  background-color: #fff;
+  border-radius: 2rem;
+  z-index: -1;
+}
+.portfolio-anime-text .word span.keyword.technology::before,
+.portfolio-anime-text .word span.keyword.SaaS::before,
+.portfolio-anime-text .word span.keyword.AI::before {
+  background-color: #7a78ff;
+}
+.portfolio-anime-text .word span.keyword.design::before,
+.portfolio-anime-text .word span.keyword.Next\.js::before,
+.portfolio-anime-text .word span.keyword.RAG::before {
+  background-color: #fe6d38;
+}
+.portfolio-anime-text .word span.keyword.data::before,
+.portfolio-anime-text .word span.keyword.Supabase::before,
+.portfolio-anime-text .word span.keyword.hybrid::before {
+  background-color: #c6fe69;
+}
+
+/* --- Tablet & Desktop Layout --- */
+@media (min-width: 768px) {
+  .portfolio-content-wrapper {
+    flex-direction: row;
+    gap: 3rem;
+  }
+  .portfolio-image-container {
+    order: 2;
+    width: 40%;
+    max-width: 400px;
+    aspect-ratio: 4 / 5;
+  }
+  .portfolio-anime-text {
+    order: 1;
+    width: 60%;
+  }
+  .portfolio-anime-text p {
+    text-align: left;
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+  }
+}
+
+/* --- Large Desktop Layout (Image on the left) --- */
+@media (min-width: 1024px) {
+  .portfolio-content-wrapper {
+    gap: 4rem;
+  }
+  .portfolio-image-container {
+    order: 1;
+  }
+  .portfolio-anime-text {
+    order: 2;
+  }
+}
+/* ===== END PORTFOLIO ABOUT ME SECTION STYLES ===== */
+
+/* ===== STICKY CARD ANIMATION STYLES (from user example) ===== */
+.sticky-card-section {
+  position: relative;
+  background-color: #ded8c8;
+}
+
+.sticky-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 250vw;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  will-change: transform;
+}
+
+.sticky-header h1 {
+  margin: 0;
+  color: #000;
+  font-size: 20vw;
+  font-weight: 200; /* lighter */
+  letter-spacing: -0.05em;
+  line-height: 100%;
+}
+
+.card {
+  position: absolute;
+  top: 10%;
+  left: 100%;
+  width: 350px;
+  height: 500px;
+  background-color: #000;
+  border-radius: 1em;
+  padding: 0.5em;
+  will-change: transform;
+  z-index: 2;
+  opacity: 0; /* Start hidden */
+  display: flex;
+  flex-direction: column;
+}
+
+.card .card-img {
+  width: 100%;
+  height: 200px;
+  border-radius: 0.5em;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.card-content {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #fff;
+  padding: 0.5em;
+}
+
+.card-content h2 {
+  font-size: 42px;
+  font-weight: 200; /* lighter */
+  letter-spacing: -0.005em;
+  color: #fff;
+}
+
+.card-content p {
+  font-size: 20px;
+  font-weight: 200; /* lighter */
+  letter-spacing: -0.005em;
+  color: #fff;
 }

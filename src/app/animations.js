@@ -1,13 +1,20 @@
 import gsap from "gsap";
 import { Flip } from "gsap/Flip";
 import { SplitText } from "gsap/SplitText";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(Flip, SplitText);
+gsap.registerPlugin(Flip, SplitText, ScrollTrigger);
 
 const setupTextSpliting = () => {
   const container = document.querySelector(".container");
   if (!container) return;
-  const textElements = container.querySelectorAll("h1, h2, p, a");
+  const textElements = container.querySelectorAll(
+    ".hero h1, .hero h2, .hero p, .hero a"
+  );
+  const aboutTitle = container.querySelector(".portfolio-profile-title");
+  if (aboutTitle) {
+    // Don't split the about title
+  }
   textElements.forEach((element) => {
     SplitText.create(element, {
       type: "lines",
@@ -120,12 +127,14 @@ function animateImages(onComplete) {
   return mainTimeline;
 }
 
-export const runAnimations = () => {
+export const runAnimations = (onComplete) => {
   const container = document.querySelector(".container");
   if (!container) return;
 
   setupTextSpliting();
   createCounterDigits();
+  setupPortfolioAboutMeAnimation();
+  setupAchievementsAnimation();
 
   const counter3 = container.querySelector(".counter-3");
   const counter2 = container.querySelector(".counter-2");
@@ -157,7 +166,7 @@ export const runAnimations = () => {
       delay: 0.3,
       onStart: () => {
         animateImages(() => {
-          const tl = gsap.timeline();
+          const tl = gsap.timeline({ onComplete });
           tl.to(".main-nav", {
             opacity: 1,
             duration: 1,
@@ -202,8 +211,153 @@ export const runAnimations = () => {
               ),
               { y: "0%", duration: 1, stagger: 0.1, ease: "power4.out" },
               "<"
-            );
+            )
+            .to(".portfolio-about", { opacity: 1, duration: 1 }, "-=0.5");
         });
       },
     });
+};
+
+const setupPortfolioAboutMeAnimation = () => {
+  const animeTextContainers = document.querySelectorAll(".portfolio-about");
+
+  animeTextContainers.forEach((container) => {
+    const imageContainer = container.querySelector(
+      ".portfolio-image-container"
+    );
+    const paragraphs = container.querySelectorAll(".portfolio-anime-text p");
+
+    paragraphs.forEach((paragraph) => {
+      const text = paragraph.textContent;
+      const words = text.split(/\s+/);
+      paragraph.innerHTML = "";
+
+      words.forEach((word) => {
+        if (word.trim()) {
+          const wordContainer = document.createElement("div");
+          wordContainer.className = "word";
+          const wordText = document.createElement("span");
+          wordText.textContent = word;
+          wordContainer.appendChild(wordText);
+          paragraph.appendChild(wordContainer);
+        }
+      });
+    });
+
+    const words = container.querySelectorAll(".word");
+
+    // Set initial state for the animation
+    gsap.set(words, { y: "100%", opacity: 0 });
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: container,
+        start: "top 70%",
+        end: "bottom 90%",
+        scrub: 1,
+      },
+    });
+
+    tl.to(imageContainer, {
+      clipPath: "inset(0% 0% 0% 0%)",
+      duration: 1,
+      ease: "power3.out",
+    }).to(
+      words,
+      {
+        y: "0%",
+        opacity: 1,
+        stagger: 0.05,
+        duration: 0.5,
+        ease: "power2.out",
+      },
+      "-=0.75"
+    );
+  });
+};
+export const setupAchievementsAnimation = () => {
+  const sectionRef = document.querySelector(".sticky-card-section");
+  if (!sectionRef) return;
+
+  const headerRef = sectionRef.querySelector(".sticky-header");
+  const cardsRef = Array.from(sectionRef.querySelectorAll(".card"));
+
+  const transform = [
+    [
+      [10, 50, -10, 10],
+      [20, -10, -45, 20],
+    ],
+    [
+      [0, 47.5, -10, 15],
+      [-25, 15, -45, 30],
+    ],
+    [
+      [0, 52.5, -10, 5],
+      [15, -5, -40, 60],
+    ],
+    [
+      [0, 50, 30, -80],
+      [20, -10, 60, 5],
+    ],
+    [
+      [0, 55, -15, 30],
+      [25, -15, 60, 95],
+    ],
+  ];
+
+  ScrollTrigger.create({
+    trigger: sectionRef,
+    start: "top top",
+    end: `+=${window.innerHeight * 5}`,
+    pin: true,
+    pinSpacing: true,
+    onUpdate: (self) => {
+      const progress = self.progress;
+      const maxTranslate = headerRef.offsetWidth - window.innerWidth;
+      const translateX = -progress * maxTranslate;
+      gsap.set(headerRef, { x: translateX });
+
+      cardsRef.forEach((card, index) => {
+        const delay = index * 0.1125;
+        const cardProgress = Math.max(0, Math.min((progress - delay) * 2, 1));
+
+        if (cardProgress > 0) {
+          const cardStartx = 25;
+          const cardEndx = -650;
+          const ypos = transform[index][0];
+          const rotation = transform[index][1];
+
+          const cardx = gsap.utils.interpolate(
+            cardStartx,
+            cardEndx,
+            cardProgress
+          );
+
+          const yprogress = cardProgress * 3;
+          const yIndex = Math.min(Math.floor(yprogress), ypos.length - 2);
+          const yinterpolation = yprogress - yIndex;
+          const cardY = gsap.utils.interpolate(
+            ypos[yIndex],
+            ypos[yIndex + 1],
+            yinterpolation
+          );
+
+          const cardRotation = gsap.utils.interpolate(
+            rotation[yIndex],
+            rotation[yIndex + 1],
+            yinterpolation
+          );
+
+          gsap.set(card, {
+            xPercent: cardx,
+            yPercent: cardY,
+            rotation: cardRotation,
+            opacity: 1,
+          });
+        } else {
+          gsap.set(card, { opacity: 0 });
+        }
+      });
+    },
+  });
 };

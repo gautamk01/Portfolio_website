@@ -4,14 +4,7 @@ import Image from "next/image";
 const Sidebar: React.FC = () => {
   return (
     <div className="sidebar absolute top-0 left-0 w-20 h-screen pt-6 flex justify-center items-start">
-      <div className="logo relative w-8 aspect-square scale-0">
-        <Image
-          src="/cap3-square.webp"
-          alt="logo"
-          fill
-          style={{ objectFit: "cover" }}
-        />
-      </div>
+      <div className="logo relative w-8 aspect-square scale-0"></div>
       <div className="divider absolute right-0 top-0 w-px h-full bg-stroke origin-top"></div>
     </div>
   );
