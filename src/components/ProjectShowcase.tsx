@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -6,6 +6,67 @@ import Lenis from "lenis";
 import "./ProjectShowcase.css";
 
 const ProjectShowcase = () => {
+  const spotlightItems = [
+    {
+      name: "Silent Arc",
+      img: "/img-1.png",
+      desc: "Description for Silent Arc",
+      liveUrl: "#",
+      gitUrl: "#",
+    },
+    {
+      name: "Bloom24",
+      img: "/img-2.png",
+      desc: "Description for Bloom24",
+      liveUrl: "#",
+      gitUrl: "#",
+    },
+    {
+      name: "Glass Fade",
+      img: "/img-3.png",
+      desc: "Description for Glass Fade",
+      liveUrl: "#",
+      gitUrl: "#",
+    },
+    {
+      name: "Stilllroom",
+      img: "/img-7.png",
+      desc: "Description for Stilllroom",
+      liveUrl: "#",
+      gitUrl: "#",
+    },
+    {
+      name: "Echo 9",
+      img: "/img-4.png",
+      desc: "Description for Echo 9",
+      liveUrl: "#",
+      gitUrl: "#",
+    },
+    {
+      name: "Mono 73",
+      img: "/img-9.png",
+      desc: "Description for Mono 73",
+      liveUrl: "#",
+      gitUrl: "#",
+    },
+    {
+      name: "Echo 9",
+      img: "/img-4.png",
+      desc: "Description for Echo 9",
+      liveUrl: "#",
+      gitUrl: "#",
+    },
+    {
+      name: "Mono 73",
+      img: "/img-9.png",
+      desc: "Description for Mono 73",
+      liveUrl: "#",
+      gitUrl: "#",
+    },
+  ];
+
+  const [bgImage, setBgImage] = useState(spotlightItems[0].img);
+
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
@@ -43,66 +104,6 @@ const ProjectShowcase = () => {
       speed: 0.4,
       arcRadius: 500,
     };
-
-    //Max - 8 in 4
-    const spotlightItems = [
-      {
-        name: "Silent Arc",
-        img: "/img-1.png",
-        desc: "Description for Silent Arc",
-        liveUrl: "#",
-        gitUrl: "#",
-      },
-      {
-        name: "Bloom24",
-        img: "/img-2.png",
-        desc: "Description for Bloom24",
-        liveUrl: "#",
-        gitUrl: "#",
-      },
-      {
-        name: "Glass Fade",
-        img: "/img-3.png",
-        desc: "Description for Glass Fade",
-        liveUrl: "#",
-        gitUrl: "#",
-      },
-      {
-        name: "Stilllroom",
-        img: "/img-7.png",
-        desc: "Description for Stilllroom",
-        liveUrl: "#",
-        gitUrl: "#",
-      },
-      {
-        name: "Echo 9",
-        img: "/img-4.png",
-        desc: "Description for Echo 9",
-        liveUrl: "#",
-        gitUrl: "#",
-      },
-      {
-        name: "Mono 73",
-        img: "/img-9.png",
-        desc: "Description for Mono 73",
-        liveUrl: "#",
-        gitUrl: "#",
-      },
-      {
-        name: "Echo 9",
-        img: "/img-4.png",
-        desc: "Description for Echo 9",
-        liveUrl: "#",
-        gitUrl: "#",
-      },
-      {
-        name: "Mono 73",
-        img: "/img-9.png",
-        desc: "Description for Mono 73",
-        liveUrl: "#",
-        gitUrl: "#",
-      },
-    ];
 
     const lenis = new Lenis();
     lenis.on("scroll", ScrollTrigger.update);
@@ -296,11 +297,7 @@ const ProjectShowcase = () => {
               spotlightItems[closestIndex]
             ) {
               titleElement[closestIndex].style.opacity = "1";
-              (
-                document.querySelector(
-                  ".spotlight-bg-img img"
-                ) as HTMLImageElement
-              ).src = spotlightItems[closestIndex].img;
+              setBgImage(spotlightItems[closestIndex].img);
             }
             currentActiveIndex = closestIndex;
           }
@@ -417,12 +414,7 @@ const ProjectShowcase = () => {
         </div>
 
         <div className="spotlight-bg-img">
-          <Image
-            src="https://images.pexels.com/photos/356056/pexels-photo-356056.jpeg"
-            alt=""
-            width={1920}
-            height={1080}
-          />
+          <Image src={bgImage} alt="" width={1920} height={1080} />
           <div className="spotlight-shade"></div>
         </div>
 
@@ -445,7 +437,7 @@ const ProjectShowcase = () => {
 
         <Image
           className="spotlight-modal__img"
-          src="#"
+          src={spotlightItems[0].img}
           alt=""
           width={500}
           height={500}
