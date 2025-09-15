@@ -13,7 +13,7 @@ import Preloader from "../components/Preloader";
 import AboutMe from "../components/AboutMe";
 import Achievements from "../components/Achievements";
 import ProjectShowcase from "../components/ProjectShowcase";
-import Lenis from "@studio-freight/lenis";
+import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./page.css";
