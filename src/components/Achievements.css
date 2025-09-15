@@ -1,0 +1,121 @@
+/* ===== STICKY CARDS SECTION STYLES ===== */
+.sticky-cards-section {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 1;
+  margin-top: 0;
+}
+
+.sticky-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 250vw;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  will-change: transform;
+}
+
+.sticky-header h1 {
+  margin: 0;
+  color: #000;
+  font-size: 20vw;
+  font-weight: normal;
+  letter-spacing: -0.05em;
+  line-height: 100%;
+}
+
+.sticky-card {
+  position: absolute;
+  top: 10%;
+  left: 100%;
+  width: 350px;
+  height: auto;
+  min-height: 400px;
+  max-height: 450px;
+  background-color: #000;
+  border-radius: 1rem;
+  padding: 1rem;
+  will-change: transform;
+  z-index: 2;
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.sticky-card .card-img {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.sticky-card .card-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0.5rem 0.5rem 0.5rem;
+  min-height: 0;
+}
+
+.sticky-card .card-content .card-description {
+  flex-grow: 1;
+}
+
+.sticky-card .card-content h2 {
+  font-size: 2rem;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.8rem;
+  color: #fff;
+  line-height: 1.2;
+}
+
+.sticky-card .card-content p {
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+  color: #fff;
+  margin: 0;
+}
+
+@media (max-width: 1000px) {
+  .sticky-header h1 {
+    font-size: 15vw;
+  }
+
+  .sticky-card .card-content h2 {
+    font-size: 2rem;
+  }
+
+  .sticky-card .card-content p {
+    font-size: 1rem;
+  }
+}
+@media (max-width: 600px) {
+  .sticky-card {
+    width: 280px;
+    min-height: 320px;
+    max-height: 350px;
+    top: 20%;
+  }
+
+  .sticky-card .card-img {
+    height: 140px;
+  }
+
+  .sticky-card .card-content h2 {
+    font-size: 1.5rem;
+  }
+
+  .sticky-card .card-content p {
+    font-size: 0.9rem;
+  }
+}

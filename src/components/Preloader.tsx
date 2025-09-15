@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import "./Preloader.css";
 
 const Preloader = () => {
   useEffect(() => {

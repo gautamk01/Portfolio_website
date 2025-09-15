@@ -182,7 +182,7 @@ export const runAnimations = (onComplete) => {
               "<"
             )
             .to(
-              container.querySelectorAll(
+              document.querySelectorAll(
                 ".main-nav .divider, .site-info .divider"
               ),
               {
@@ -276,11 +276,11 @@ const setupPortfolioAboutMeAnimation = () => {
   });
 };
 export const setupAchievementsAnimation = () => {
-  const sectionRef = document.querySelector(".sticky-card-section");
+  const sectionRef = document.querySelector(".sticky-cards-section");
   if (!sectionRef) return;
 
   const headerRef = sectionRef.querySelector(".sticky-header");
-  const cardsRef = Array.from(sectionRef.querySelectorAll(".card"));
+  const cardsRef = Array.from(sectionRef.querySelectorAll(".sticky-card"));
 
   const transform = [
     [

@@ -1,9 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
+import "./Achievements.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -41,34 +42,131 @@ const cardData = [
 ];
 
 const Achievements = () => {
-  return (
-    <section className="sticky-card-section w-full h-screen overflow-hidden">
-      <div className="sticky-header">
-        <h1>Gautam Krishna M, GK</h1>
-      </div>
+  const sectionRef = useRef(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const cardsRef = useRef<HTMLDivElement[]>([]);
 
-      {cardData.map((card, index) => (
-        <div key={index} className="card">
-          <div className="card-img">
-            <Image
-              src={card.imgSrc}
-              alt={card.title}
-              fill
-              style={{ objectFit: "cover" }}
-              loading="lazy"
-            />
-          </div>
-          <div className="card-content">
-            <div className="card-title">
-              <h2>{card.title}</h2>
-            </div>
-            <div className="card-description">
-              <p>{card.description}</p>
-            </div>
-          </div>
+  useEffect(() => {
+    const stickySection = sectionRef.current;
+    const stickyHeader = headerRef.current;
+    const cards = cardsRef.current;
+
+    if (!stickySection || !stickyHeader || cards.length === 0) return;
+
+    const transform = [
+      [
+        [10, 50, -10, 10],
+        [20, -10, -45, 20],
+      ],
+      [
+        [0, 47.5, -10, 15],
+        [-25, 15, -45, 30],
+      ],
+      [
+        [0, 52.5, -10, 5],
+        [15, -5, -40, 60],
+      ],
+      [
+        [0, 50, 30, -80],
+        [20, -10, 60, 5],
+      ],
+      [
+        [0, 55, -15, 30],
+        [25, -15, 60, 95],
+      ],
+    ];
+
+    const scrollTrigger = ScrollTrigger.create({
+      trigger: stickySection,
+      start: "top top",
+      end: `+=${window.innerHeight * 5}`,
+      pin: true,
+      pinSpacing: true,
+      scrub: 1,
+      onUpdate: (self) => {
+        const progress = self.progress;
+        const maxTranslate = stickyHeader.offsetWidth - window.innerWidth;
+        const translateX = -progress * maxTranslate;
+        gsap.set(stickyHeader, { x: translateX });
+
+        cards.forEach((card, index) => {
+          const delay = index * 0.1125;
+          const cardProgress = Math.max(0, Math.min((progress - delay) * 2, 1));
+
+          if (cardProgress > 0) {
+            const [ypos, rotation] = transform[index];
+            const cardx = gsap.utils.interpolate(25, -650, cardProgress);
+
+            const yprogress = cardProgress * 3;
+            const yIndex = Math.min(Math.floor(yprogress), ypos.length - 2);
+            const yinterpolation = yprogress - yIndex;
+            const cardY = gsap.utils.interpolate(
+              ypos[yIndex],
+              ypos[yIndex + 1],
+              yinterpolation
+            );
+
+            const cardRotation = gsap.utils.interpolate(
+              rotation[yIndex],
+              rotation[yIndex + 1],
+              yinterpolation
+            );
+
+            gsap.set(card, {
+              xPercent: cardx,
+              yPercent: cardY,
+              rotation: cardRotation,
+              opacity: 1,
+            });
+          } else {
+            gsap.set(card, { opacity: 0 });
+          }
+        });
+      },
+    });
+
+    return () => {
+      scrollTrigger.kill();
+    };
+  }, []);
+
+  return (
+    <div className="bg-[var(--loader-bg)] py-16">
+      <h2 className="portfolio-profile-title">Key Highlights</h2>
+      <section ref={sectionRef} className="sticky-cards-section">
+        <div ref={headerRef} className="sticky-header">
+          <h1>Gautam Krishna M, GK</h1>
         </div>
-      ))}
-    </section>
+
+        {cardData.map((card, index) => (
+          <div
+            key={index}
+            ref={(el) => {
+              if (el) cardsRef.current[index] = el;
+            }}
+            className="sticky-card"
+          >
+            <div className="card-img">
+              <Image
+                src={card.imgSrc}
+                alt={card.title}
+                fill
+                style={{ objectFit: "cover" }}
+                loading="lazy"
+              />
+            </div>
+            <div className="card-content">
+              <div className="card-title">
+                <h2>{card.title}</h2>
+              </div>
+              <div className="card-description">
+                <p>{card.description}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </section>
+    </div>
   );
 };
 

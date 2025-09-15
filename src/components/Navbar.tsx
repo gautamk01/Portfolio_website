@@ -4,9 +4,11 @@ import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import Link from "next/link";
 import Image from "next/image";
+import "./Navbar.css";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const menuPreviewImgRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -27,6 +29,22 @@ const Navbar: React.FC = () => {
       menuToggle?.removeEventListener("click", handleMenuToggle);
     };
   }, [isOpen]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const handleMouseOver = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (!isOpen) return;
@@ -58,7 +76,7 @@ const Navbar: React.FC = () => {
 
   return (
     <>
-      <nav className="main-nav">
+      <nav className={`main-nav ${isScrolled ? "scrolled" : ""}`}>
         <div className="nav-left">
           <div className="logo-name">
             <Link href="/">GK</Link>

@@ -1,0 +1,101 @@
+/* ===== PORTFOLIO ABOUT ME SECTION STYLES ===== */
+.portfolio-about {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(2rem, 5vh, 4rem) 1rem;
+  min-height: 100vh;
+  background-color: var(--loader-bg);
+  color: var(--fg);
+  overflow-x: hidden;
+}
+
+.portfolio-profile-title {
+  font-size: clamp(2rem, 8vw, 4.5rem);
+  font-weight: 500;
+  text-align: center;
+  color: var(--fg);
+  margin-bottom: clamp(1rem, 3vh, 2rem);
+}
+
+.portfolio-copy-container {
+  border: 0.15rem dashed var(--stroke);
+  border-radius: 1.5rem;
+  padding: clamp(1rem, 4vw, 2.5rem);
+  width: 90%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.portfolio-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: clamp(1rem, 3vh, 2rem);
+}
+
+.portfolio-image-container {
+  order: 1;
+  width: clamp(120px, 40%, 220px);
+  aspect-ratio: 1 / 1;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+  will-change: clip-path;
+  clip-path: inset(100% 0 0 0);
+}
+
+.portfolio-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.portfolio-anime-text {
+  order: 2;
+  width: 100%;
+}
+
+.portfolio-anime-text p {
+  font-weight: 500;
+  line-height: 1.6;
+  text-align: left;
+  font-size: clamp(0.95rem, 2.5vh, 1.1rem);
+}
+
+@media (min-width: 768px) {
+  .portfolio-content-wrapper {
+    flex-direction: row;
+    gap: 3rem;
+  }
+  .portfolio-image-container {
+    order: 2;
+    width: 40%;
+    max-width: 400px;
+    aspect-ratio: 4 / 5;
+  }
+  .portfolio-anime-text {
+    order: 1;
+    width: 60%;
+  }
+  .portfolio-anime-text p {
+    text-align: left;
+    font-size: clamp(1.1rem, 1.5vw, 1.25rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  .portfolio-content-wrapper {
+    gap: 4rem;
+  }
+  .portfolio-image-container {
+    order: 1;
+  }
+  .portfolio-anime-text {
+    order: 2;
+  }
+}
