@@ -1,16 +1,16 @@
 import React from "react";
 
 const images = [
-  "/img-1.png",
-  "/img-2.png",
-  "/img-3.png",
-  "/img-4.png",
-  "/img-5.png",
-  "/img-6.png",
-  "/img-7.png",
-  "/img-8.png",
-  "/img-9.png",
-  "/img-10.png",
+  "/img-1.webp",
+  "/img-2.webp",
+  "/img-3.webp",
+  "/img-4.webp",
+  "/img-5.webp",
+  "/img-6.webp",
+  "/img-7.webp",
+  "/img-8.webp",
+  "/img-9.webp",
+  "/img-10.webp",
 ];
 
 const ImageGrid: React.FC = () => {
