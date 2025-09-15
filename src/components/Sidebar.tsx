@@ -12,7 +12,7 @@ const Sidebar: React.FC = () => {
           style={{ objectFit: "cover" }}
         />
       </div>
-      <div className="divider absolute right-0 top-0 w-px h-full bg-stroke origin-top scale-y-0"></div>
+      <div className="divider absolute right-0 top-0 w-px h-full bg-stroke origin-top"></div>
     </div>
   );
 };
