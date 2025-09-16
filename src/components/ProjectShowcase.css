@@ -258,6 +258,7 @@ section {
 
   .spotlight-titles h1 {
     font-size: clamp(2rem, 12vw, 3rem); /* Adjusted font size */
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
   }
 
   .spotlight-images {

@@ -121,7 +121,7 @@ const Home: React.FC = () => {
                 <div className="contact-new__layout">
                   <header className="contact-new__header">
                     <h2 className="contact-new__title">
-                      Let’s build&nbsp;something
+                      Let’s build something{" "}
                       <span className="text-gradient">amazing.</span>
                     </h2>
                     <p className="contact-new__subtitle">
