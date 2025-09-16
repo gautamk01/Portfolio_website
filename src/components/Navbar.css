@@ -42,6 +42,7 @@ nav.main-nav.scrolled .menu-toggle {
   align-items: center;
   justify-content: center;
   padding: 0;
+  overflow: hidden;
 }
 
 nav.main-nav.scrolled .burger-line {

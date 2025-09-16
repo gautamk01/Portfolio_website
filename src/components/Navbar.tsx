@@ -6,28 +6,39 @@ import Link from "next/link";
 import Image from "next/image";
 import "./Navbar.css";
 
-const Navbar: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
+interface NavbarProps {
+  isOpen: boolean;
+  onToggle: () => void;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ isOpen, onToggle }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const menuPreviewImgRef = useRef<HTMLDivElement>(null);
 
+  // Effect for handling the click to toggle menu state
   useEffect(() => {
     const menuToggle = document.querySelector(".menu-toggle");
-    const body = document.querySelector("body");
-    const container = document.querySelector(".container");
+    if (!menuToggle) return;
 
-    const handleMenuToggle = () => {
-      setIsOpen(!isOpen);
-      menuToggle?.classList.toggle("open");
-      body?.classList.toggle("menu-open");
-      container?.classList.toggle("menu-open");
-    };
-
-    menuToggle?.addEventListener("click", handleMenuToggle);
+    menuToggle.addEventListener("click", onToggle);
 
     return () => {
-      menuToggle?.removeEventListener("click", handleMenuToggle);
+      menuToggle.removeEventListener("click", onToggle);
     };
+  }, [onToggle]);
+
+  // Effect for managing container class for 3D effect
+  useEffect(() => {
+    const menuToggle = document.querySelector(".menu-toggle");
+    const container = document.querySelector(".container");
+
+    if (isOpen) {
+      menuToggle?.classList.add("open");
+      container?.classList.add("menu-open");
+    } else {
+      menuToggle?.classList.remove("open");
+      container?.classList.remove("menu-open");
+    }
   }, [isOpen]);
 
   useEffect(() => {

@@ -16,12 +16,19 @@
   box-sizing: border-box;
 }
 
+html {
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: var(--fg) transparent;
+}
+
 body {
   font-family: "PP Neue Montreal", "Inter", sans-serif;
   color: var(--fg);
   background-color: var(--bg);
   overflow: hidden; /* Start with scroll disabled */
   transition: overflow 0.3s ease;
+  width: 100%;
 }
 
 /* Loading state - completely locked */
@@ -41,8 +48,9 @@ body.loaded {
   width: auto;
 }
 
-body.menu-open {
-  overflow: hidden !important;
+/* Lock scroll when menu is open */
+body.scroll-locked {
+  overflow: hidden;
 }
 
 img {
@@ -95,6 +103,24 @@ body.menu-open nav.main-nav .nav-right {
 body.menu-open nav.main-nav {
   background: transparent;
   backdrop-filter: none;
+}
+
+/* Custom Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--fg);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #333;
 }
 
 /* Responsive Styles */

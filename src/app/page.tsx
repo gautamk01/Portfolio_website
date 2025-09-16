@@ -21,6 +21,7 @@ import "./page.css";
 const Home: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [animationsComplete, setAnimationsComplete] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const lenisRef = useRef<Lenis | null>(null);
 
   // Setup Lenis smooth scrolling & GSAP ticker
@@ -56,7 +57,15 @@ const Home: React.FC = () => {
       runAnimations(() => {
         document.body.classList.add("loaded");
         setAnimationsComplete(true);
-        lenisRef.current?.start(); // Enable scrolling after animations
+
+        // Hide animation elements on mobile after completion
+        if (window.innerWidth <= 768) {
+          const counter = document.querySelector(".counter");
+          const heroFooterImage = document.querySelector(".hero-footer-image");
+          if (counter) (counter as HTMLElement).style.display = "none";
+          if (heroFooterImage)
+            (heroFooterImage as HTMLElement).style.display = "none";
+        }
       });
     }
   }, [loading]);
@@ -67,12 +76,29 @@ const Home: React.FC = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  // Lock/unlock scroll when menu is toggled
+  useEffect(() => {
+    if (isMenuOpen) {
+      lenisRef.current?.stop();
+      document.body.classList.add("scroll-locked");
+    } else {
+      if (animationsComplete) {
+        lenisRef.current?.start();
+      }
+      document.body.classList.remove("scroll-locked");
+    }
+  }, [isMenuOpen, animationsComplete]);
+
+  const handleMenuToggle = () => {
+    setIsMenuOpen((prev) => !prev);
+  };
+
   return (
     <>
       <Preloader />
       {!loading && (
         <>
-          <Navbar />
+          <Navbar isOpen={isMenuOpen} onToggle={handleMenuToggle} />
           <div className="container">
             <section className="hero">
               <div className="hero-bg"></div>

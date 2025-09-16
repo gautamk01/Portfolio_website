@@ -41,7 +41,7 @@
   order: 1;
   width: clamp(120px, 40%, 220px);
   aspect-ratio: 1 / 1;
-  border-radius: 1rem;
+  border-radius: 1.5rem;
   overflow: hidden;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   flex-shrink: 0;
@@ -76,7 +76,7 @@
     order: 2;
     width: 40%;
     max-width: 400px;
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 1 / 1;
   }
   .portfolio-anime-text {
     order: 1;
@@ -88,7 +88,7 @@
   }
 }
 
-@media (min-width: 1024px) {
+@media (min--width: 1024px) {
   .portfolio-content-wrapper {
     gap: 4rem;
   }

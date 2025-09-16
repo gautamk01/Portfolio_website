@@ -138,6 +138,20 @@
   z-index: 4;
 }
 
+.hero-footer {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 7.5rem;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.hero-footer-image {
+  display: none; /* Hidden by default, shown on mobile */
+}
+
 .site-info .divider {
   width: 100%;
   height: 1px;
@@ -150,13 +164,6 @@
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
-}
-
-.hero-footer {
-  position: absolute;
-  bottom: 1.5rem;
-  left: 7.5rem;
-  z-index: 4;
 }
 
 .line {
@@ -174,7 +181,7 @@
 .contact-new {
   position: relative;
   width: 100vw;
-  min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -357,6 +364,8 @@
 
   .hero-footer {
     left: 1.5rem;
+    bottom: 1.5rem;
+    width: calc(100% - 3rem);
   }
 
   .images-container .img {
@@ -371,6 +380,8 @@
 @media (max-width: 768px) {
   .contact-new {
     padding: 6rem 1.5rem;
+    min-height: auto;
+    justify-content: flex-start;
   }
   .contact-new__form .form-row {
     flex-direction: column;
@@ -396,10 +407,81 @@
   .simple-footer p {
     font-size: 0.85rem;
   }
+
+  /* Responsive Hero Section Layout */
+  .header h1 {
+    font-size: 2.5rem;
+    letter-spacing: -0.05rem;
+  }
+
+  .site-info h2 {
+    font-size: 1.25rem;
+  }
+
+  .hero-footer h2 {
+    font-size: 1.5rem;
+  }
+
+  .hero {
+    display: flex;
+    flex-direction: column;
+    padding: 10rem 1.5rem 1.5rem;
+    height: 100svh;
+  }
+
+  .header,
+  .site-info,
+  .hero-footer {
+    position: static;
+    transform: none;
+    width: 100%;
+  }
+
+  .header {
+    margin-bottom: 0;
+  }
+
+  .site-info {
+    margin-top: auto;
+    margin-bottom: 3rem;
+  }
+
+  .site-info .divider {
+    transform: scaleX(100%);
+  }
+
+  .hero-footer {
+    margin-top: 0;
+    margin-bottom: 0;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .hero-footer-image {
+    display: block;
+    width: 80px;
+    height: 80px;
+  }
 }
 
 @media (max-width: 600px) {
   .container.menu-open {
     transform: rotate(3deg) translate(50px, 100px) scale(1.1);
+  }
+
+  .header h1 {
+    font-size: 2.25rem;
+  }
+
+  .site-info h2 {
+    font-size: 1.1rem;
+  }
+
+  .header {
+    top: 18%;
+  }
+
+  .site-info {
+    top: 52%;
   }
 }

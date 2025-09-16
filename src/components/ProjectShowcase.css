@@ -193,6 +193,18 @@ section {
   color: #fff;
 }
 
+.spotlight-shade {
+  position: absolute;
+  inset: 0;
+  z-index: 1; /* sits on top of the image */
+  background: radial-gradient(
+    ellipse 60% 100% at 30% 50%,
+    rgba(0, 0, 0, 0.65) 0%,
+    rgba(0, 0, 0, 0) 70%
+  );
+  pointer-events: none; /* keeps image clicks intact */
+}
+
 @media (max-width: 1000px) {
   .intro,
   .outro {
@@ -202,6 +214,8 @@ section {
 
   .spotlight-titles-container {
     clip-path: none;
+    left: 5vw;
+    width: 90vw;
   }
 
   .spotlight-titles-container::before,
@@ -211,6 +225,49 @@ section {
 
   .spotlight-titles {
     left: 0;
+    width: 100%;
+  }
+}
+
+@media (max-width: 950px) {
+  .spotlight-header {
+    display: none;
+  }
+}
+
+/* Added styles for better smartphone responsiveness */
+@media (max-width: 640px) {
+  .spotlight-intro-text-wrapper {
+    padding: 0 1rem;
+  }
+  .spotlight-intro-text p {
+    font-size: clamp(1.5rem, 10vw, 2.5rem); /* Adjusted font size */
+  }
+
+  .spotlight-titles-container {
+    left: 0;
+    width: 100%;
+    padding: 0 1rem; /* Add some padding */
+  }
+
+  .spotlight-titles {
+    align-items: center; /* Center the titles */
+    text-align: center;
+    gap: 4rem;
+  }
+
+  .spotlight-titles h1 {
+    font-size: clamp(2rem, 12vw, 3rem); /* Adjusted font size */
+  }
+
+  .spotlight-images {
+    width: 100%; /* Allow images to fly across the full screen */
+    min-width: unset;
+  }
+
+  .spotlight-img {
+    width: 150px; /* Smaller images for smaller screens */
+    height: 112.5px;
   }
 }
 
@@ -297,22 +354,4 @@ section {
 }
 .spotlight-modal__btn:hover {
   filter: brightness(1.15);
-}
-
-.spotlight-shade {
-  position: absolute;
-  inset: 0;
-  z-index: 1; /* sits on top of the image */
-  background: radial-gradient(
-    ellipse 60% 100% at 30% 50%,
-    rgba(0, 0, 0, 0.65) 0%,
-    rgba(0, 0, 0, 0) 70%
-  );
-  pointer-events: none; /* keeps image clicks intact */
-}
-
-@media (max-width: 950px) {
-  .spotlight-header {
-    display: none;
-  }
 }
