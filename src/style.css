@@ -17,7 +17,6 @@
 }
 
 html {
-  overflow-x: hidden;
   scrollbar-width: thin;
   scrollbar-color: var(--fg) transparent;
 }
@@ -26,26 +25,18 @@ body {
   font-family: "PP Neue Montreal", "Inter", sans-serif;
   color: var(--fg);
   background-color: var(--bg);
-  overflow: hidden; /* Start with scroll disabled */
-  transition: overflow 0.3s ease;
-  width: 100%;
-}
-
-/* Loading state - completely locked */
-body.loading {
-  overflow: hidden !important;
-  height: 100vh !important;
-  position: fixed !important;
-  width: 100% !important;
-}
-
-/* After loading - enable scrolling */
-body.loaded {
-  overflow-x: hidden;
   overflow-y: auto;
-  position: static;
-  height: auto;
-  width: auto;
+  overflow-x: hidden;
+}
+
+/* Page Load Animation */
+.page-container {
+  opacity: 0;
+  transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.page-container.is-loaded {
+  opacity: 1;
 }
 
 /* Lock scroll when menu is open */
@@ -454,10 +445,5 @@ body.menu-open nav.main-nav {
     min-height: 100vh !important;
     margin-bottom: 0 !important;
     padding-bottom: 0 !important;
-  }
-
-  body.loading,
-  body.loaded {
-    overflow-x: hidden;
   }
 }

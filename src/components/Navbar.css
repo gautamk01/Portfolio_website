@@ -3,7 +3,7 @@ nav.main-nav {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
+  width: 100%;
   height: 5rem;
   background: transparent;
   display: flex;

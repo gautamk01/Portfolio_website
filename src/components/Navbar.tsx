@@ -57,6 +57,16 @@ const Navbar: React.FC<NavbarProps> = ({ isOpen, onToggle }) => {
     };
   }, []);
 
+  useEffect(() => {
+    // Animate the divider line on component mount
+    gsap.to(".divider", {
+      scaleX: 1,
+      duration: 1.5,
+      ease: "power2.out",
+      delay: 1, // Delay to sync with other page load animations
+    });
+  }, []);
+
   const handleMouseOver = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (!isOpen) return;
     const imgsrc = e.currentTarget.getAttribute("data-img");
@@ -97,9 +107,9 @@ const Navbar: React.FC<NavbarProps> = ({ isOpen, onToggle }) => {
         <div className="nav-center">
           <div className="nav-links">
             <Link href="/resume">Resume</Link>
-            <Link href="/projects">Projects</Link>
-            <Link href="/about">About</Link>
-            <Link href="/contact">Contact</Link>
+            <Link href="/#projects">Projects</Link>
+            <Link href="/#about">About</Link>
+            <Link href="/#contact">Contact</Link>
           </div>
         </div>
 
@@ -133,36 +143,40 @@ const Navbar: React.FC<NavbarProps> = ({ isOpen, onToggle }) => {
               <div className="menu-links">
                 <div className="link">
                   <a
-                    href="#"
+                    href="/resume"
                     data-img="/resume.webp"
                     onMouseOver={handleMouseOver}
+                    onClick={onToggle}
                   >
                     Resume
                   </a>
                 </div>
                 <div className="link">
                   <a
-                    href="#"
+                    href="/#projects"
                     data-img="/contact.webp"
                     onMouseOver={handleMouseOver}
+                    onClick={onToggle}
                   >
                     Projects
                   </a>
                 </div>
                 <div className="link">
                   <a
-                    href="#"
+                    href="/#about"
                     data-img="/about_me.webp"
                     onMouseOver={handleMouseOver}
+                    onClick={onToggle}
                   >
                     About
                   </a>
                 </div>
                 <div className="link">
                   <a
-                    href="#"
+                    href="/#contact"
                     data-img="/contact.webp"
                     onMouseOver={handleMouseOver}
+                    onClick={onToggle}
                   >
                     Contact
                   </a>

@@ -1,0 +1,235 @@
+/* New Journey Section Styles */
+.journey-section-new {
+  position: relative;
+  width: 100%;
+  padding: clamp(6rem, 15vh, 10rem) 2rem;
+  background-color: var(--bg);
+  color: var(--fg);
+}
+
+.journey-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.journey-header {
+  margin-bottom: 4rem;
+}
+
+.journey-title-new {
+  font-size: clamp(3rem, 7vw, 5rem);
+  font-weight: 500;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+.journey-title-new .text-gradient {
+  background: linear-gradient(90deg, #4f46e5, #7c3aed);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+.journey-subtitle-new {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: rgba(31, 31, 31, 0.7);
+  max-width: 550px;
+  line-height: 1.6;
+}
+
+.journey-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+}
+
+/* Timeline Column */
+.journey-timeline-col {
+  position: relative;
+  padding-left: 3rem; /* Space for the line and dots */
+}
+
+.journey-timeline-col::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 2rem;
+  bottom: 0;
+  width: 2px;
+  background-color: rgba(31, 31, 31, 0.15);
+  z-index: 1;
+}
+
+.timeline-progress-line {
+  position: absolute;
+  left: 8px;
+  top: 2rem;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(to bottom, #818cf8, #4f46e5);
+  box-shadow: 0 0 10px 1px #818cf8;
+  transform: scaleY(0);
+  transform-origin: top;
+  z-index: 2;
+}
+
+.timeline-year-group {
+  position: relative;
+  margin-bottom: 3rem;
+}
+
+.timeline-year-marker {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-left: -3rem; /* Pull back into the padding area */
+  margin-bottom: 2rem;
+}
+
+.timeline-dot-new {
+  width: 18px;
+  height: 18px;
+  background-color: var(--bg);
+  border: 3px solid var(--fg);
+  border-radius: 50%;
+  z-index: 3;
+}
+
+.timeline-year {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 600;
+  color: var(--fg);
+  margin-left: 1.5rem;
+}
+
+.timeline-events-col {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.timeline-event-item {
+  position: relative;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.3s ease;
+}
+
+.timeline-event-institution {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: rgba(31, 31, 31, 0.6);
+  margin-bottom: 0.5rem;
+}
+
+.timeline-event-title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--fg);
+  margin-bottom: 0.75rem;
+}
+
+.timeline-event-description {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: rgba(31, 31, 31, 0.7);
+}
+
+.timeline-event-image-mobile {
+  display: none; /* Hidden by default on large screens */
+  margin-top: 1.5rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-event-img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+/* Image Column */
+.journey-image-col {
+  position: relative;
+  height: 100%;
+}
+
+.sticky-image-wrapper {
+  position: sticky;
+  top: 120px;
+  width: 100%;
+}
+
+.browser-frame {
+  border-radius: 0.75rem;
+  background-color: #fff;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.browser-header {
+  padding: 0.75rem;
+  background-color: #f1f5f9;
+  display: flex;
+  align-items: center;
+}
+
+.browser-dots {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.browser-dots span {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+.browser-dots span:nth-child(1) {
+  background-color: #ef4444;
+}
+.browser-dots span:nth-child(2) {
+  background-color: #f59e0b;
+}
+.browser-dots span:nth-child(3) {
+  background-color: #22c55e;
+}
+
+.browser-image {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .journey-layout {
+    grid-template-columns: 1fr;
+  }
+  .journey-image-col {
+    display: none;
+  }
+  .timeline-event-image-mobile {
+    display: block; /* Show the image on smaller screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .journey-section-new {
+    padding: 4rem 1.5rem;
+  }
+  .journey-timeline-col {
+    padding-left: 2rem;
+  }
+  .journey-timeline-col::before,
+  .timeline-progress-line {
+    left: 8px;
+  }
+  .timeline-year-marker {
+    margin-left: -2rem;
+  }
+}

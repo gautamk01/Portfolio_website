@@ -131,7 +131,7 @@ const Achievements = () => {
   }, []);
 
   return (
-    <div className="bg-[var(--loader-bg)] py-16">
+    <div className="bg-[var(--bg)] py-16">
       <h2 className="portfolio-profile-title">Key Highlights</h2>
       <section ref={sectionRef} className="sticky-cards-section">
         <div ref={headerRef} className="sticky-header">

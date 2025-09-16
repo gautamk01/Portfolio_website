@@ -64,6 +64,7 @@ const AboutMe = () => {
   return (
     <section
       ref={sectionRef}
+      id="about"
       className="portfolio-about portfolio-anime-text-container"
     >
       <h2 className="portfolio-profile-title">A Little About Me</h2>
