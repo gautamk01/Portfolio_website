@@ -113,9 +113,11 @@ const ProjectShowcase = () => {
       onUpdate: (self) => {
         const progress = self.progress;
         const introText = section.querySelectorAll(".spotlight-intro-text");
-        const bgImg = section.querySelector<HTMLDivElement>(".spotlight-bg-img");
+        const bgImg =
+          section.querySelector<HTMLDivElement>(".spotlight-bg-img");
         const bgImgInner = bgImg?.querySelector("img");
-        const header = section.querySelector<HTMLDivElement>(".spotlight-header");
+        const header =
+          section.querySelector<HTMLDivElement>(".spotlight-header");
         const titlesContainer = section.querySelector<HTMLDivElement>(
           ".spotlight-titles-container"
         );
@@ -250,7 +252,9 @@ const ProjectShowcase = () => {
             {spotlightItems.map((item, index) => (
               <h1
                 key={index}
-                ref={(el) => (titleRefs.current[index] = el)}
+                ref={(el) => {
+                  titleRefs.current[index] = el;
+                }}
                 onClick={() => handleTitleClick(index)}
               >
                 {item.name}
@@ -264,7 +268,9 @@ const ProjectShowcase = () => {
             <div
               key={index}
               className="spotlight-img"
-              ref={(el) => (imageRefs.current[index] = el)}
+              ref={(el) => {
+                imageRefs.current[index] = el;
+              }}
               style={{ opacity: 0 }}
             >
               <Image
