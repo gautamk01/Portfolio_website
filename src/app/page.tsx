@@ -67,10 +67,10 @@ const Home: React.FC = () => {
       <Navbar isOpen={isMenuOpen} onToggle={handleMenuToggle} />
       <main>
         <Hero />
-        <AboutMe />
         <ProjectShowcase />
-        <Achievements />
+        <AboutMe />
         <Journey />
+        <Achievements />
         <section className="contact-new" id="contact">
           <div className="contact-new__layout">
             <header className="contact-new__header">
@@ -92,12 +92,7 @@ const Home: React.FC = () => {
             >
               <div className="form-row">
                 <input type="text" name="name" placeholder="Name" required />
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  required
-                />
+                <input type="email" name="email" placeholder="Email" required />
               </div>
               <input
                 type="text"
