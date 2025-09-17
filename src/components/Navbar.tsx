@@ -142,44 +142,44 @@ const Navbar: React.FC<NavbarProps> = ({ isOpen, onToggle }) => {
             <div className="col-sm">
               <div className="menu-links">
                 <div className="link">
-                  <a
+                  <Link
                     href="/resume"
                     data-img="/resume.webp"
                     onMouseOver={handleMouseOver}
                     onClick={onToggle}
                   >
                     Resume
-                  </a>
+                  </Link>
                 </div>
                 <div className="link">
-                  <a
+                  <Link
                     href="/#projects"
                     data-img="/contact.webp"
                     onMouseOver={handleMouseOver}
                     onClick={onToggle}
                   >
                     Projects
-                  </a>
+                  </Link>
                 </div>
                 <div className="link">
-                  <a
+                  <Link
                     href="/#about"
                     data-img="/about_me.webp"
                     onMouseOver={handleMouseOver}
                     onClick={onToggle}
                   >
                     About
-                  </a>
+                  </Link>
                 </div>
                 <div className="link">
-                  <a
+                  <Link
                     href="/#contact"
                     data-img="/contact.webp"
                     onMouseOver={handleMouseOver}
                     onClick={onToggle}
                   >
                     Contact
-                  </a>
+                  </Link>
                 </div>
               </div>
 

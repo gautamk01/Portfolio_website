@@ -71,7 +71,7 @@ const ProjectShowcase = () => {
         start: "top top",
         end: () => `+=${scrollDistance}`,
         invalidateOnRefresh: true,
-        onUpdate: (self) => {
+        onUpdate: () => {
           const viewportCenter = window.innerWidth / 2;
           cards.forEach((card) => {
             const cardRect = card.getBoundingClientRect();
@@ -85,7 +85,12 @@ const ProjectShowcase = () => {
             const scale = gsap.utils.mapRange(0, 1, 0.9, 1)(progress);
             const opacity = gsap.utils.mapRange(0, 1, 0.7, 1)(progress);
 
-            gsap.to(card, { scale, opacity, duration: 0.5, ease: "power3.out" });
+            gsap.to(card, {
+              scale,
+              opacity,
+              duration: 0.5,
+              ease: "power3.out",
+            });
           });
         },
       },
