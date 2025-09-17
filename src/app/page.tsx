@@ -9,8 +9,11 @@ import Journey from "../components/Journey";
 import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { FaLinkedin, FaGithub, FaInstagram, FaTwitter } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
 import "./page.css";
 import Hero from "../components/Hero";
+import LikeButton from "../components/LikeButton";
 
 const Home: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -67,9 +70,9 @@ const Home: React.FC = () => {
       <Navbar isOpen={isMenuOpen} onToggle={handleMenuToggle} />
       <main>
         <Hero />
-        <ProjectShowcase />
         <AboutMe />
         <Journey />
+        <ProjectShowcase />
         <Achievements />
         <section className="contact-new" id="contact">
           <div className="contact-new__layout">
@@ -79,54 +82,37 @@ const Home: React.FC = () => {
                 <span className="text-gradient">amazing.</span>
               </h2>
               <p className="contact-new__subtitle">
-                Got an idea, a question, or just want to say hi?
-                <br />
-                Drop a message – I usually reply within a few hours.
+                Feel free to reach out through any of the platforms below.
               </p>
             </header>
 
-            <form
-              className="contact-new__form"
-              id="contactForm"
-              autoComplete="on"
-            >
-              <div className="form-row">
-                <input type="text" name="name" placeholder="Name" required />
-                <input type="email" name="email" placeholder="Email" required />
-              </div>
-              <input
-                type="text"
-                name="subject"
-                placeholder="Subject"
-                required
-              />
-              <textarea
-                name="message"
-                placeholder="Tell me about your project…"
-                rows={4}
-                required
-              ></textarea>
-
-              <button type="submit" className="submit-btn">
-                <span className="btn-text">Send Message</span>
-                <span className="btn-icon">→</span>
-              </button>
-              <span className="form-status" aria-live="polite"></span>
-            </form>
-          </div>
-
-          <div className="contact-new__footer">
-            <a href="mailto:gautamkrishna@example.com">
-              gautamkrishna@example.com
-            </a>
-            <div className="spacer"></div>
-            <a href="#">LinkedIn</a>
-            <a href="#">GitHub</a>
-            <a href="#">Twitter</a>
+            <div className="contact-new__socials">
+              <a href="mailto:studentgkm@gmail.com" aria-label="Email">
+                <MdEmail />
+              </a>
+              <a href="#" aria-label="LinkedIn">
+                <FaLinkedin />
+              </a>
+              <a href="#" aria-label="GitHub">
+                <FaGithub />
+              </a>
+              <a href="#" aria-label="Instagram">
+                <FaInstagram />
+              </a>
+              <a href="#" aria-label="Twitter">
+                <FaTwitter />
+              </a>
+            </div>
+            
+            <p className="contact-new__footer-text">
+              Or just send me a direct message at{" "}
+              <a href="mailto:studentgkm@gmail.com">studentgkm@gmail.com</a>
+            </p>
           </div>
         </section>
         <footer className="simple-footer">
           <div className="footer-content">
+            <LikeButton />
             <p>© 2025 Gautam Krishna M ALL RIGHT RESERVED</p>
           </div>
         </footer>

@@ -1,11 +1,27 @@
 /* ===== STICKY CARDS SECTION STYLES ===== */
+.achievements-section-wrapper {
+  position: relative; /* Needed for star positioning */
+  background-color: var(--bg); /* Initial light background */
+  padding: 6rem 0;
+  overflow: hidden;
+}
+
+.achievements-title {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 500;
+  text-align: center;
+  color: var(--fg); /* Initial dark text */
+  margin-bottom: 4rem;
+  position: relative;
+  z-index: 3; /* Ensure title is above stars */
+}
+
 .sticky-cards-section {
   position: relative;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
   z-index: 1;
-  margin-top: 0;
 }
 
 .sticky-header {
@@ -22,9 +38,9 @@
 
 .sticky-header h1 {
   margin: 0;
-  color: #000;
+  color: rgba(255, 255, 255, 0.05); /* Very subtle text for dark bg */
   font-size: 20vw;
-  font-weight: normal;
+  font-weight: 600;
   letter-spacing: -0.05em;
   line-height: 100%;
 }
@@ -33,34 +49,50 @@
   position: absolute;
   top: 10%;
   left: 100%;
-  width: 350px;
+  width: 380px;
   height: auto;
-  min-height: 400px;
-  max-height: 450px;
-  background-color: #000;
-  border-radius: 1rem;
-  padding: 1rem;
-  will-change: transform;
+  min-height: 420px;
+  max-height: 480px;
+
+  /* Glassmorphism effect for dark background */
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  will-change: transform, border;
   z-index: 2;
   opacity: 0;
   display: flex;
   flex-direction: column;
+
+  /* Glowing border effect */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  transition: box-shadow 0.5s ease;
+}
+
+/* Active state for the card */
+.sticky-card.is-active {
+  box-shadow: 0 0 80px 10px rgba(255, 255, 255, 0.15);
 }
 
 .sticky-card .card-img {
   position: relative;
   width: 100%;
-  height: 180px;
-  border-radius: 0.5rem;
+  height: 200px;
+  border-radius: 1rem;
   overflow: hidden;
   flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .sticky-card .card-content {
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 1rem 0.5rem 0.5rem 0.5rem;
+  padding: 1.5rem 0.5rem 0.5rem 0.5rem;
   min-height: 0;
 }
 
@@ -69,10 +101,10 @@
 }
 
 .sticky-card .card-content h2 {
-  font-size: 2rem;
-  font-weight: 400;
+  font-size: 2.2rem;
+  font-weight: 500;
   letter-spacing: -0.02em;
-  margin-bottom: 0.8rem;
+  margin-bottom: 1rem;
   color: #fff;
   line-height: 1.2;
 }
@@ -81,8 +113,8 @@
   font-size: 1rem;
   font-weight: 400;
   letter-spacing: -0.01em;
-  line-height: 1.4;
-  color: #fff;
+  line-height: 1.5;
+  color: #d1d5db; /* Lighter gray */
   margin: 0;
 }
 
@@ -90,31 +122,28 @@
   .sticky-header h1 {
     font-size: 15vw;
   }
-
   .sticky-card .card-content h2 {
     font-size: 2rem;
   }
-
   .sticky-card .card-content p {
     font-size: 1rem;
   }
 }
+
 @media (max-width: 600px) {
   .sticky-card {
-    width: 280px;
-    min-height: 320px;
-    max-height: 350px;
-    top: 20%;
+    width: 300px;
+    min-height: 350px;
+    max-height: 400px;
+    top: 15%;
+    padding: 1rem;
   }
-
   .sticky-card .card-img {
-    height: 140px;
+    height: 150px;
   }
-
   .sticky-card .card-content h2 {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
   }
-
   .sticky-card .card-content p {
     font-size: 0.9rem;
   }

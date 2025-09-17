@@ -6,6 +6,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SplitType from "split-type";
 import "./AboutMe.css";
+import Skills from "./Skills";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -89,6 +90,7 @@ const AboutMe = () => {
             />
           </div>
         </div>
+        <Skills />
       </div>
     </section>
   );

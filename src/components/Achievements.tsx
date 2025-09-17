@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import "./Achievements.css";
+import NightScene from "./NightScene";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -42,9 +43,49 @@ const cardData = [
 ];
 
 const Achievements = () => {
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement[]>([]);
+
+  useEffect(() => {
+    const wrapper = wrapperRef.current;
+    if (!wrapper) return;
+
+    const ctx = gsap.context(() => {
+      // Animate background and title color on scroll
+      gsap.to(wrapper, {
+        backgroundColor: "#0c0c1d", // Deep night sky blue
+        scrollTrigger: {
+          trigger: wrapper,
+          start: "top 80%",
+          end: "top top",
+          scrub: 1,
+        },
+      });
+      gsap.to(".achievements-title", {
+        color: "#f1f1f1", // Light text color
+        scrollTrigger: {
+          trigger: wrapper,
+          start: "top 80%",
+          end: "top top",
+          scrub: 1,
+        },
+      });
+      // Fade in the night scene
+      gsap.to(".night-scene-wrapper", {
+        opacity: 1,
+        scrollTrigger: {
+          trigger: wrapper,
+          start: "top 60%",
+          end: "top 20%",
+          scrub: 1,
+        },
+      });
+    }, wrapperRef);
+
+    return () => ctx.revert();
+  }, []);
 
   useEffect(() => {
     const stickySection = sectionRef.current;
@@ -76,63 +117,75 @@ const Achievements = () => {
       ],
     ];
 
-    const scrollTrigger = ScrollTrigger.create({
-      trigger: stickySection,
-      start: "top top",
-      end: `+=${window.innerHeight * 5}`,
-      pin: true,
-      pinSpacing: true,
-      scrub: 1,
-      onUpdate: (self) => {
-        const progress = self.progress;
-        const maxTranslate = stickyHeader.offsetWidth - window.innerWidth;
-        const translateX = -progress * maxTranslate;
-        gsap.set(stickyHeader, { x: translateX });
+    const cardAnimationCtx = gsap.context(() => {
+      ScrollTrigger.create({
+        trigger: stickySection,
+        start: "top top",
+        end: `+=${window.innerHeight * 5}`,
+        pin: true,
+        pinSpacing: true,
+        scrub: 1,
+        onUpdate: (self) => {
+          const progress = self.progress;
+          const maxTranslate = stickyHeader.offsetWidth - window.innerWidth;
+          const translateX = -progress * maxTranslate;
+          gsap.set(stickyHeader, { x: translateX });
 
-        cards.forEach((card, index) => {
-          const delay = index * 0.1125;
-          const cardProgress = Math.max(0, Math.min((progress - delay) * 2, 1));
-
-          if (cardProgress > 0) {
-            const [ypos, rotation] = transform[index];
-            const cardx = gsap.utils.interpolate(25, -650, cardProgress);
-
-            const yprogress = cardProgress * 3;
-            const yIndex = Math.min(Math.floor(yprogress), ypos.length - 2);
-            const yinterpolation = yprogress - yIndex;
-            const cardY = gsap.utils.interpolate(
-              ypos[yIndex],
-              ypos[yIndex + 1],
-              yinterpolation
+          cards.forEach((card, index) => {
+            const delay = index * 0.1125;
+            const cardProgress = Math.max(
+              0,
+              Math.min((progress - delay) * 2, 1)
             );
 
-            const cardRotation = gsap.utils.interpolate(
-              rotation[yIndex],
-              rotation[yIndex + 1],
-              yinterpolation
-            );
+            if (cardProgress > 0.75 && cardProgress <= 1) {
+              card.classList.add("is-active");
+            } else {
+              card.classList.remove("is-active");
+            }
 
-            gsap.set(card, {
-              xPercent: cardx,
-              yPercent: cardY,
-              rotation: cardRotation,
-              opacity: 1,
-            });
-          } else {
-            gsap.set(card, { opacity: 0 });
-          }
-        });
-      },
-    });
+            if (cardProgress > 0) {
+              const [ypos, rotation] = transform[index];
+              const cardx = gsap.utils.interpolate(25, -650, cardProgress);
+
+              const yprogress = cardProgress * 3;
+              const yIndex = Math.min(Math.floor(yprogress), ypos.length - 2);
+              const yinterpolation = yprogress - yIndex;
+              const cardY = gsap.utils.interpolate(
+                ypos[yIndex],
+                ypos[yIndex + 1],
+                yinterpolation
+              );
+
+              const cardRotation = gsap.utils.interpolate(
+                rotation[yIndex],
+                rotation[yIndex + 1],
+                yinterpolation
+              );
+
+              gsap.set(card, {
+                xPercent: cardx,
+                yPercent: cardY,
+                rotation: cardRotation,
+                opacity: 1,
+              });
+            } else {
+              gsap.set(card, { opacity: 0 });
+            }
+          });
+        },
+      });
+    }, sectionRef);
 
     return () => {
-      scrollTrigger.kill();
+      cardAnimationCtx.revert();
     };
   }, []);
 
   return (
-    <div className="bg-[var(--bg)] py-16">
-      <h2 className="portfolio-profile-title">Key Highlights</h2>
+    <div className="achievements-section-wrapper" ref={wrapperRef}>
+      <NightScene />
+      <h2 className="achievements-title">Key Highlights</h2>
       <section ref={sectionRef} className="sticky-cards-section">
         <div ref={headerRef} className="sticky-header">
           <h1>Gautam Krishna M, GK</h1>

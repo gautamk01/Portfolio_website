@@ -1,0 +1,39 @@
+.like-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid var(--fg);
+  background-color: transparent;
+  color: var(--fg);
+  font-size: 1rem;
+}
+
+.like-button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px);
+}
+
+.like-button.liked {
+  background-color: #ef4444; /* A nice red color */
+  color: #fff;
+  border-color: #ef4444;
+}
+
+.like-button.liked:hover {
+  background-color: #dc2626; /* Darker red on hover */
+}
+
+.like-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  transition: transform 0.3s ease;
+}
+
+.like-button.liked .like-icon {
+  transform: scale(1.1);
+}

@@ -1,343 +1,125 @@
-.spotlight {
+/* New Project Showcase Styles */
+.projects-section {
   position: relative;
-  width: 100vw;
-  height: 100svh;
-  overflow: hidden;
+  width: 100%;
   background-color: var(--bg);
+  color: var(--fg);
+  overflow: hidden; /* Crucial for horizontal scroll */
+  padding-top: clamp(6rem, 15vh, 10rem);
 }
 
-.intro,
-.outro {
+.projects-header-container {
+  text-align: center;
+  padding: 0 2rem;
+  margin-bottom: 4rem;
+}
+
+.projects-title {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.projects-subtitle {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: rgba(31, 31, 31, 0.7);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.projects-horizontal-container {
+  height: 80vh;
+  width: 100%;
   display: flex;
-  justify-content: center;
   align-items: center;
-  background-color: #0f0f0f;
-  color: #fff;
-  font-size: clamp(2.25rem, 1.25rem + 4vw, 6rem);
-  line-height: 1.1;
 }
 
-/* “Discover” header */
-.spotlight-header p {
-  font-size: clamp(1.5rem, 0.75rem + 3vw, 3.5rem);
-  color: #fff;
-}
-
-/* Project titles that scroll in */
-.spotlight-titles h1 {
-  font-size: clamp(2.2rem, 1.1rem + 4.5vw, 5.5rem);
-  line-height: 1.05;
-}
-
-/* “Beneath” split text */
-.spotlight-intro-text p {
-  font-size: clamp(1.75rem, 0.75rem + 3.5vw, 4rem);
-}
-.spotlight-intro-text-wrapper {
-  position: absolute;
-  width: 100%;
-  top: 50%;
-  transform: translateY(-50%);
+.projects-wrapper {
   display: flex;
-  gap: 0.5rem;
-  z-index: 2;
-}
-
-.spotlight-intro-text {
-  flex: 1;
-  position: relative;
+  align-items: center;
+  gap: clamp(2rem, 4vw, 4rem);
+  /* Define card width as a variable for reuse */
+  --card-width: clamp(300px, 60vw, 550px);
+  /* Calculate padding to center the first and last cards */
+  padding: 0 calc(50vw - var(--card-width) / 2);
   will-change: transform;
 }
 
-.spotlight-intro-text:nth-child(1) {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.spotlight-bg-img {
-  position: absolute;
-  width: 100%;
-  height: 100%;
+.project-card {
+  flex-shrink: 0;
+  width: var(--card-width);
+  height: clamp(400px, 60vh, 500px);
+  background-color: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   overflow: hidden;
-  transform: scale(0);
-  will-change: transform;
-}
-
-.spotlight-bg-img img {
-  transform: scale(1.5);
-  will-change: transform;
-}
-
-.spotlight-titles-container {
-  position: absolute;
-  top: 0;
-  left: 15vw;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  clip-path: polygon(
-    50vh 0px,
-    0px 50%,
-    50svh 100%,
-    100% calc(100% + 100svh),
-    100% -100svh
-  );
-  --before-opacity: 0;
-  --after-opacity: 0;
-}
-
-.spotlight-titles-container::before,
-.spotlight-titles-container::after {
-  content: "";
-  position: absolute;
-  width: 100svh;
-  height: 2.5px;
-  background: #fff;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-  z-index: 10;
-}
-
-.spotlight-titles-container::before {
-  top: 0;
-  left: 0;
-  transform: rotate(-45deg) translate(-7rem);
-  opacity: var(--before-opacity);
-}
-
-.spotlight-titles-container::after {
-  bottom: 0;
-  left: 0;
-  transform: rotate(45deg) translate(-7rem);
-  opacity: var(--after-opacity);
-}
-
-.spotlight-titles {
-  position: relative;
-  left: 15%;
-  width: 75%;
-  height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 5rem;
-  transform: translateY(100%);
-  z-index: 2;
+  will-change: transform, opacity;
 }
 
-.spotlight-titles h1 {
-  color: #fff;
-  opacity: 0.25;
-  transition: opacity 0.3s ease;
-  cursor: pointer;
-}
-.spotlight-titles h1:hover {
-  color: #d6d5d5;
-  transition: all 0.4s ease;
-}
-
-.spotlight-images {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 50%;
-  min-width: 300px;
-  height: 100%;
-  z-index: 1;
-  pointer-events: none;
-}
-
-.spotlight-img {
-  position: absolute;
-  width: 200px;
-  height: 150px;
-  will-change: transform;
-  border-radius: 0.5rem;
-  overflow: hidden;
-}
-
-.spotlight-img img {
-  object-fit: cover;
-}
-
-.spotlight-header {
-  position: absolute;
-  top: 50%;
-  left: 10%;
-  transform: translateY(-50%);
-  transition: opacity 0.3s ease;
-  z-index: 2;
-  opacity: 0;
-  color: #fff;
-}
-
-.spotlight-shade {
-  position: absolute;
-  inset: 0;
-  z-index: 1; /* sits on top of the image */
-  background: radial-gradient(
-    ellipse 60% 100% at 30% 50%,
-    rgba(0, 0, 0, 0.65) 0%,
-    rgba(0, 0, 0, 0) 70%
-  );
-  pointer-events: none; /* keeps image clicks intact */
-}
-
-@media (max-width: 1000px) {
-  .intro,
-  .outro {
-    padding: 2rem;
-    text-align: center;
-  }
-
-  .spotlight-titles-container {
-    clip-path: none;
-    left: 5vw;
-    width: 90vw;
-  }
-
-  .spotlight-titles-container::before,
-  .spotlight-titles-container::after {
-    display: none;
-  }
-
-  .spotlight-titles {
-    left: 0;
-    width: 100%;
-  }
-}
-
-@media (max-width: 950px) {
-  .spotlight-header {
-    display: none;
-  }
-}
-
-/* Added styles for better smartphone responsiveness */
-@media (max-width: 640px) {
-  .spotlight-intro-text-wrapper {
-    padding: 0 1rem;
-  }
-  .spotlight-intro-text p {
-    font-size: clamp(1.5rem, 10vw, 2.5rem); /* Adjusted font size */
-  }
-
-  .spotlight-titles-container {
-    left: 0;
-    width: 100%;
-    padding: 0 1rem; /* Add some padding */
-  }
-
-  .spotlight-titles {
-    align-items: center; /* Center the titles */
-    text-align: center;
-    gap: 4rem;
-  }
-
-  .spotlight-titles h1 {
-    font-size: clamp(2rem, 12vw, 3rem); /* Adjusted font size */
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
-  }
-
-  .spotlight-images {
-    width: 100%; /* Allow images to fly across the full screen */
-    min-width: unset;
-  }
-
-  .spotlight-img {
-    width: 150px; /* Smaller images for smaller screens */
-    height: 112.5px;
-  }
-}
-
-.spotlight-modal {
-  --pad: clamp(1rem, 4vw, 3rem);
-  position: fixed;
-  inset: 0;
-  z-index: 999;
-  display: grid;
-  place-content: center;
-  place-items: center;
-  background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(6px);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.35s ease;
-  padding: var(--pad);
-  text-align: center;
-  color: #fff;
-  font-family: inherit;
-}
-.spotlight-modal.open {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.spotlight-modal-content {
+.project-image-container {
   position: relative;
-}
-
-.spotlight-modal__close {
-  position: absolute;
-  top: calc(var(--pad) * -0.5);
-  right: calc(var(--pad) * -0.5);
-  background: none;
-  border: 0;
-  font-size: 2rem;
-  color: #fff;
-  cursor: pointer;
-  line-height: 1;
-  z-index: 10;
-}
-
-.spotlight-modal__title {
-  font-size: clamp(2rem, 5vw + 1rem, 4rem);
-  margin: 0 0 0.5em;
-  color: #fff;
-}
-.spotlight-modal__desc {
-  font-size: clamp(0.9rem, 1.5vw + 0.5rem, 1.25rem);
-  max-width: 50ch;
-  margin: 0 0 1.5em;
-  line-height: 1.6;
-  color: #fff;
-}
-
-.spotlight-modal__img {
   width: 100%;
-  max-width: 400px;
-  aspect-ratio: 4/3;
-  object-fit: cover;
-  border-radius: 6px;
-  margin-bottom: 1.5rem;
+  height: 55%;
+  flex-shrink: 0;
 }
 
-.spotlight-modal__btns {
+.project-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.project-content h3 {
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.project-content p {
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+  color: rgba(31, 31, 31, 0.7);
+  line-height: 1.6;
+  flex-grow: 1;
+}
+
+.project-links {
+  margin-top: 1rem;
   display: flex;
   gap: 1rem;
-  flex-wrap: wrap;
-  justify-content: center;
 }
 
-.spotlight-modal__btn {
-  padding: 0.75em 2em;
-  border: none;
-  font-size: clamp(0.9rem, 1vw + 0.5rem, 1.1rem);
-  cursor: pointer;
-  transition: all 0.25s ease;
+.project-links a {
+  padding: 0.5rem 1.25rem;
+  border-radius: 99px;
   text-decoration: none;
-  border-radius: 0.5rem;
   font-weight: 600;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
 }
 
-.spotlight-modal__btn.live {
-  background: #fff;
-  color: #000;
+.project-links a:first-child {
+  background-color: var(--fg);
+  color: var(--bg);
 }
-.spotlight-modal__btn.git {
-  background: #333;
-  color: #fff;
+
+.project-links a:last-child {
+  background-color: transparent;
+  color: var(--fg);
+  box-shadow: inset 0 0 0 1px var(--fg);
 }
-.spotlight-modal__btn:hover {
-  filter: brightness(1.15);
+
+.project-links a:hover {
   transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .project-card {
+    width: 80vw;
+  }
 }

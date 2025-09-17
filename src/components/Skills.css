@@ -1,0 +1,130 @@
+.skills-component-wrapper {
+  width: 100%;
+  padding-top: 3rem;
+  margin-top: 3rem;
+  border-top: 0.15rem dashed var(--stroke);
+}
+
+.skills-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.skills-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.skills-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--fg);
+  opacity: 0.6;
+  margin-bottom: 0.5rem;
+}
+
+.skills-title {
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--fg);
+}
+
+.skills-title-highlight {
+  background: linear-gradient(90deg, #4f46e5, #7c3aed);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+.skills-subtitle {
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+  color: rgba(31, 31, 31, 0.7);
+  max-width: 60ch;
+  margin: 1rem auto 0;
+  line-height: 1.6;
+}
+
+.skills-grid-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.skills-category {
+  width: 100%;
+}
+
+.skills-category-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: rgba(31, 31, 31, 0.6);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.skill-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90px;
+  height: 90px;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-radius: 0.75rem;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.skill-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.07);
+}
+
+.skill-icon {
+  font-size: 2.2rem;
+  color: var(--fg);
+  opacity: 0.7;
+  transition: color 0.3s ease, opacity 0.3s ease;
+}
+
+.skill-item:hover .skill-icon {
+  opacity: 1;
+  color: #4f46e5;
+}
+
+.skill-name {
+  position: absolute;
+  bottom: -2rem;
+  font-size: 0.8rem;
+  color: var(--fg);
+  opacity: 0;
+  transition: opacity 0.3s ease, bottom 0.3s ease;
+  pointer-events: none;
+}
+
+.skill-item:hover .skill-name {
+  opacity: 1;
+  bottom: -1.75rem;
+}
+
+@media (max-width: 768px) {
+  .skill-item {
+    width: 80px;
+    height: 80px;
+  }
+  .skill-icon {
+    font-size: 2rem;
+  }
+}
