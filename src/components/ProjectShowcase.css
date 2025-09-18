@@ -5,13 +5,19 @@
   background-color: var(--bg);
   color: var(--fg);
   overflow: hidden; /* Crucial for horizontal scroll */
-  padding-top: clamp(6rem, 15vh, 10rem);
+  
+  /* Make section a full-height flex container */
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: clamp(6rem, 15vh, 10rem) 0 0;
 }
 
 .projects-header-container {
   text-align: center;
   padding: 0 2rem;
   margin-bottom: 4rem;
+  flex-shrink: 0; /* Prevent header from shrinking */
 }
 
 .projects-title {
@@ -29,10 +35,13 @@
 }
 
 .projects-horizontal-container {
-  height: 80vh;
   width: 100%;
   display: flex;
   align-items: center;
+  
+  /* Allow container to fill remaining space */
+  flex-grow: 1;
+  min-height: 0; /* Fix for flexbox overflow issues */
 }
 
 .projects-wrapper {
@@ -119,6 +128,13 @@
 
 /* Responsive */
 @media (max-width: 768px) {
+  .projects-section {
+    height: 100dvh;
+    padding: 4rem 0 0;
+  }
+  .projects-header-container {
+    margin-bottom: 2rem;
+  }
   .project-card {
     width: 80vw;
   }

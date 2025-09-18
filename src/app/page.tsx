@@ -19,6 +19,7 @@ const Home: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const lenisRef = useRef<Lenis | null>(null);
+  const contactRef = useRef<HTMLElement>(null);
 
   // Effect for the initial loading animation
   useEffect(() => {
@@ -61,6 +62,59 @@ const Home: React.FC = () => {
     }
   }, [isMenuOpen]);
 
+  // Effect for contact section background transition and content fade-in
+  useEffect(() => {
+    const contactSection = contactRef.current;
+    if (!contactSection) return;
+
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: contactSection,
+          start: "top 50%", // Start when the top of the section is at the middle of the screen
+          end: "top 20%",   // End when it's near the top
+          scrub: true,
+        },
+      });
+
+      // Animate background color
+      tl.to(contactSection, {
+        backgroundColor: "#f1efe7", // to light
+        color: "#1f1f1f", // to dark text
+      })
+        .to(
+          ".contact-new__subtitle",
+          { color: "rgba(31, 31, 31, 0.7)" },
+          "<"
+        )
+        .to(
+          ".contact-new__footer-text",
+          { color: "rgba(31, 31, 31, 0.6)" },
+          "<"
+        )
+        .to(".contact-new__socials a", { color: "#1f1f1f" }, "<")
+        .to(".contact-new__footer-text a", { color: "#1f1f1f" }, "<");
+
+      // Animate content fade-in
+      gsap.fromTo(
+        ".contact-new__layout",
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          scrollTrigger: {
+            trigger: contactSection,
+            start: "top 80%",
+            end: "top 50%",
+            scrub: true,
+          },
+        }
+      );
+    }, contactRef);
+
+    return () => ctx.revert();
+  }, []);
+
   const handleMenuToggle = () => {
     setIsMenuOpen((prev) => !prev);
   };
@@ -74,7 +128,7 @@ const Home: React.FC = () => {
         <Journey />
         <ProjectShowcase />
         <Achievements />
-        <section className="contact-new" id="contact">
+        <section ref={contactRef} className="contact-new" id="contact">
           <div className="contact-new__layout">
             <header className="contact-new__header">
               <h2 className="contact-new__title">
