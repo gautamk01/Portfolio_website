@@ -123,7 +123,7 @@ const Home: React.FC = () => {
                 <MdEmail />
               </a>
               <a
-                href="www.linkedin.com/in/gautam-krishna-dev"
+                href="https://www.linkedin.com/in/gautam-krishna-dev/"
                 aria-label="LinkedIn"
               >
                 <FaLinkedin />
