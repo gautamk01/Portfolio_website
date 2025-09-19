@@ -4,8 +4,11 @@ import "../style.css";
 import { ThemeProvider } from "@/contexts/ThemeProvider";
 
 export const metadata: Metadata = {
-  title: "GK - Computer Science Portfolio",
+  title: "GK",
   description: "Full Stack Developer & Software Engineer",
+  icons: {
+    icon: "/gk.ico",
+  },
 };
 
 export default function RootLayout({

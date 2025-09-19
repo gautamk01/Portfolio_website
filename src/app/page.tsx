@@ -116,23 +116,32 @@ const Home: React.FC = () => {
             </header>
 
             <div className="contact-new__socials">
-              <a href="mailto:studentgkm@gmail.com" aria-label="Email">
+              <a
+                href="mailto:gautamkrishna.mooppil.dev@gmail.com"
+                aria-label="Email"
+              >
                 <MdEmail />
               </a>
-              <a href="#" aria-label="LinkedIn">
+              <a
+                href="www.linkedin.com/in/gautam-krishna-dev"
+                aria-label="LinkedIn"
+              >
                 <FaLinkedin />
               </a>
-              <a href="#" aria-label="GitHub">
+              <a href="https://github.com/gautamk01" aria-label="GitHub">
                 <FaGithub />
               </a>
-              <a href="#" aria-label="Instagram">
+              <a
+                href="https://www.instagram.com/gautam__gk?igsh=ZWQya2xiMG02bXht"
+                aria-label="Instagram"
+              >
                 <FaInstagram />
               </a>
-              <a href="#" aria-label="Twitter">
+              <a href="https://x.com/Gautamkrishna_M" aria-label="Twitter">
                 <FaTwitter />
               </a>
             </div>
-            
+
             <p className="contact-new__footer-text">
               Or just send me a direct message at{" "}
               <a href="mailto:studentgkm@gmail.com">studentgkm@gmail.com</a>

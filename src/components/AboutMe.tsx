@@ -82,7 +82,7 @@ const AboutMe = () => {
           </div>
           <div ref={imageRef} className="portfolio-image-container">
             <Image
-              src="/img-9.webp"
+              src="/me.jpeg"
               alt="Abstract digital art"
               width={800}
               height={480}

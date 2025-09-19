@@ -53,7 +53,7 @@
 .journey-timeline-col::before {
   content: '';
   position: absolute;
-  left: 8px;
+  left: 7px;
   top: 2rem;
   bottom: 0;
   width: 2px;
@@ -63,7 +63,7 @@
 
 .timeline-progress-line {
   position: absolute;
-  left: 8px;
+  left: 7px;
   top: 2rem;
   width: 2px;
   height: 100%;
@@ -116,11 +116,28 @@
   transition: background-color 0.3s ease;
 }
 
+.timeline-event-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
 .timeline-event-institution {
   font-size: 0.9rem;
   font-weight: 500;
   color: var(--fg-muted);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0;
+}
+
+.timeline-event-date {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--fg-muted);
+  opacity: 0.8;
+  flex-shrink: 0;
 }
 
 .timeline-event-title {

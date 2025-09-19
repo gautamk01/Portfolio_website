@@ -10,14 +10,39 @@ gsap.registerPlugin(ScrollTrigger);
 
 const journeyData = [
   {
-    year: "2024",
+    year: "2024 - Present",
     events: [
       {
-        title: "M.Tech in Big Data Analytics",
+        title: "Hack Battle Hackathon",
+        institution: "VIT Gravitas",
+        date: "Feb 2024",
+        description:
+          "Participated in Hack Battle, building innovative solutions with a focus on problem-solving and rapid prototyping.",
+        imageSrc: "/hack.jpeg",
+      },
+      {
+        title: "Top 5 Finisher – Caterpillar Code-a-thon",
+        institution: "VIT Vellore",
+        date: "Mar 2024",
+        description:
+          "Led UI/UX design in a 4-member team to build a voice-first worker assistance agent integrating ML and voice technology, securing a top 5 rank among 50+ teams.",
+        imageSrc: "/cat.jpeg",
+      },
+      {
+        title: "Joined M.Tech CSE Specialization in Big Data Analytics",
         institution: "Vellore Institute of Technology",
+        date: "Aug 2024 - Present",
         description:
           "Deepening my expertise in large-scale data processing, machine learning, and advanced analytics to tackle complex data-driven challenges.",
-        imageSrc: "/img-8.webp",
+        imageSrc: "/VIT.jpeg",
+      },
+      {
+        title: "Graduated B.Tech in Computer Science & Engineering",
+        institution: "Amrita Vishwa Vidyapeetham, Amritapuri",
+        date: "May 2024",
+        description:
+          "Graduated with a CGPA of 8.53/10, building a strong foundation in algorithms, software development, databases, and system design.",
+        imageSrc: "/img-12.jpeg",
       },
     ],
   },
@@ -27,9 +52,26 @@ const journeyData = [
       {
         title: "O/E/N Innovation Award",
         institution: "OEN India Ltd.",
+        date: "Dec 2023",
         description:
-          "Recognized for developing an innovative tech solution, winning a significant cash prize and accolades for creativity and impact.",
-        imageSrc: "/img-7.webp",
+          "Awarded the OEN Technology Innovation Award (First Runner-up) for advancing sustainable mobility with a fully off-grid solar-powered EV charging solution.",
+        imageSrc: "/mit.jpeg",
+      },
+      {
+        title: "Digital Change Maker (Semi-finalist)",
+        institution: "Hackton 2023",
+        date: "Oct 2023",
+        description:
+          "Selected as a semi-finalist for proposing impactful digital innovation solutions during Hackton.",
+        imageSrc: "/change.jpeg",
+      },
+      {
+        title: "Event Coordinator",
+        institution: "Vidyut 2023 – National Level MultiFest",
+        date: "May 2023",
+        description:
+          "Coordinated the event 'Pitch an Idea: Sustainability' and contributed as an Executive Member under the Technical Team.",
+        imageSrc: "/vidyuth.jpeg",
       },
     ],
   },
@@ -37,11 +79,28 @@ const journeyData = [
     year: "2022",
     events: [
       {
-        title: "Lead, Web-SIG @ ACM VIT",
-        institution: "Association for Computing Machinery",
+        title: "Web-SIG Lead & Mentor",
+        institution: "ACM Student Chapter, Amritapuri",
+        date: "Aug 2022 - Oct 2023",
         description:
-          "Led a community of over 200 student developers, overseeing web development projects, workshops, and mentorship programs.",
-        imageSrc: "/img-6.webp",
+          "Led workshops, mentored peers in web development, and guided projects as part of ACM Student Chapter.",
+        imageSrc: "/img-14.jpeg",
+      },
+      {
+        title: "Executive Member & Treasurer",
+        institution: "AMESE Club, Amrita",
+        date: "Jan 2022 - Dec 2022",
+        description:
+          "Served as Treasurer and Executive Committee Member, managing events and fostering technical growth among students.",
+        imageSrc: "/ameese.jpeg",
+      },
+      {
+        title: "Social Outreach Project",
+        institution: "Amrita Vishwa Vidyapeetham",
+        date: "Oct 2022 - Dec 2022",
+        description:
+          "Organized Fire & Safety Awareness programs and created evacuation maps using AutoCAD to enhance campus safety.",
+        imageSrc: "/img-15.jpeg",
       },
     ],
   },
@@ -49,11 +108,38 @@ const journeyData = [
     year: "2020",
     events: [
       {
-        title: "B.Tech in Computer Science & Engineering",
-        institution: "Vellore Institute of Technology",
+        title: "Joined B.Tech in Computer Science & Engineering",
+        institution: "Amrita Vishwa Vidyapeetham, Amritapuri",
+        date: "Oct 2020",
         description:
-          "Built a strong foundation in core computer science principles, software development, and system design, graduating with honors.",
-        imageSrc: "/img-10.webp",
+          "Started undergraduate studies, focusing on core computer science principles, programming, and software development.",
+        imageSrc: "/Btech.jpeg",
+      },
+    ],
+  },
+  {
+    year: "2019",
+    events: [
+      {
+        title: "Higher Secondary Education (Class 12)",
+        institution: "M.E.S. Central School, Tirur",
+        date: "May 2019",
+        description:
+          "Completed Class 12 with 85% marks, focusing on core science and mathematics subjects.",
+        imageSrc: "/school_1.jpeg",
+      },
+    ],
+  },
+  {
+    year: "2017",
+    events: [
+      {
+        title: "Secondary Education (Class 10)",
+        institution: "M.E.S. Central School, Tirur",
+        date: "May 2017",
+        description:
+          "Achieved a CGPA of 9.3/10, excelling in academics and actively participating in extracurricular activities.",
+        imageSrc: "/school_1.jpeg",
       },
     ],
   },
@@ -154,9 +240,12 @@ const Journey = () => {
                       className="timeline-event-item"
                       data-image={event.imageSrc}
                     >
-                      <p className="timeline-event-institution">
-                        {event.institution}
-                      </p>
+                      <div className="timeline-event-meta">
+                        <p className="timeline-event-institution">
+                          {event.institution}
+                        </p>
+                        <p className="timeline-event-date">{event.date}</p>
+                      </div>
                       <h4 className="timeline-event-title">{event.title}</h4>
                       <p className="timeline-event-description">
                         {event.description}

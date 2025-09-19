@@ -23,6 +23,14 @@ nav.main-nav.scrolled .nav-center {
   pointer-events: none;
 }
 
+/* Hide nav links when menu is open */
+nav.main-nav.menu-open .nav-center {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  pointer-events: none;
+}
+
 /* Keep menu toggle visible and functional when scrolling */
 nav.main-nav.scrolled .nav-right {
   opacity: 1;

@@ -98,7 +98,11 @@ const Navbar: React.FC<NavbarProps> = ({ isOpen, onToggle }) => {
 
   return (
     <>
-      <nav className={`main-nav ${isScrolled ? "scrolled" : ""}`}>
+      <nav
+        className={`main-nav ${isScrolled ? "scrolled" : ""} ${
+          isOpen ? "menu-open" : ""
+        }`}
+      >
         <div className="nav-left">
           <div className="logo-name">
             <Link href="/">GK</Link>

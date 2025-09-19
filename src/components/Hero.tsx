@@ -80,7 +80,7 @@ const Hero = () => {
         <div className="hero-visual">
           <div className="profile-image-container">
             <Image
-              src="/cap3-square.webp"
+              src="/img-10.webp"
               alt="GK - Full Stack Developer"
               width={300}
               height={300}
@@ -89,7 +89,9 @@ const Hero = () => {
             />
           </div>
           <div className="floating-cards-wrapper">
-            <div className="floating-card card-1">💻 Full Stack Development</div>
+            <div className="floating-card card-1">
+              💻 Full Stack Development
+            </div>
             <div className="floating-card card-2">🎯 Problem Solving</div>
             <div className="floating-card card-3">🚀 System Architecture</div>
           </div>
