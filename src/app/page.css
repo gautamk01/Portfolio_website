@@ -8,9 +8,9 @@
   justify-content: center;
   align-items: center;
   padding: clamp(4rem, 10vh, 8rem) 2rem;
-  background-color: #0c0c1d; /* Start with dark background */
-  color: #f1f1f1; /* Start with light text */
   overflow: hidden;
+  background-color: var(--bg);
+  color: var(--fg);
 }
 
 .contact-new__layout {
@@ -42,10 +42,10 @@
 
 .contact-new__subtitle {
   font-size: clamp(1rem, 2vw, 1.1rem);
-  color: rgba(241, 241, 241, 0.7); /* Lightened for dark bg */
   max-width: 550px;
   margin: 0 auto;
   line-height: 1.6;
+  color: var(--fg-muted);
 }
 
 .contact-new__socials {
@@ -57,9 +57,9 @@
 }
 
 .contact-new__socials a {
-  color: #f1f1f1; /* Lightened for dark bg */
   font-size: 2.5rem; /* Larger icon size */
   transition: color 0.3s ease, transform 0.3s ease;
+  color: var(--fg);
 }
 
 .contact-new__socials a:hover {
@@ -70,15 +70,15 @@
 .contact-new__footer-text {
   margin-top: 4rem;
   font-size: 1rem;
-  color: rgba(241, 241, 241, 0.6); /* Lightened for dark bg */
+  color: var(--fg-muted);
 }
 
 .contact-new__footer-text a {
-  color: #f1f1f1; /* Lightened for dark bg */
   font-weight: 600;
   text-decoration: underline;
   text-underline-offset: 4px;
   transition: color 0.3s ease;
+  color: var(--fg);
 }
 
 .contact-new__footer-text a:hover {

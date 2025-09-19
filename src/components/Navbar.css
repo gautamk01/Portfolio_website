@@ -32,9 +32,9 @@ nav.main-nav.scrolled .nav-right {
 
 /* Enhanced menu toggle styling when scrolling */
 nav.main-nav.scrolled .menu-toggle {
-  background: rgba(31, 31, 31, 0.9);
+  background: var(--scrolled-nav-bg);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--stroke);
   border-radius: 50%;
   width: 60px;
   height: 60px;
@@ -45,8 +45,8 @@ nav.main-nav.scrolled .menu-toggle {
   overflow: hidden;
 }
 
-nav.main-nav.scrolled .burger-line {
-  background-color: white;
+body:not(.dark) nav.main-nav.scrolled .burger-line {
+  background-color: var(--menu-fg);
 }
 
 /* Smooth transitions for all nav elements */
@@ -102,6 +102,8 @@ nav.main-nav.scrolled .burger-line {
   flex: 1;
   display: flex;
   justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
 }
 
 /* Burger Menu Styling */
@@ -126,7 +128,7 @@ nav.main-nav.scrolled .burger-line {
 .burger-line {
   width: 100%;
   height: 2px;
-  background-color: black;
+  background-color: var(--fg);
   transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55),
     opacity 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55),
     background-color 0.1s ease;
@@ -134,7 +136,7 @@ nav.main-nav.scrolled .burger-line {
 }
 
 .menu-toggle.open .burger-line {
-  background-color: white;
+  background-color: var(--menu-fg);
 }
 
 /* Burger Animation States */

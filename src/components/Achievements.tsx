@@ -6,6 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import "./Achievements.css";
 import NightScene from "./NightScene";
+import { useTheme } from "../contexts/ThemeProvider";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -43,6 +44,7 @@ const cardData = [
 ];
 
 const Achievements = () => {
+  const { theme } = useTheme();
   const wrapperRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef(null);
   const headerRef = useRef<HTMLDivElement>(null);
@@ -53,9 +55,9 @@ const Achievements = () => {
     if (!wrapper) return;
 
     const ctx = gsap.context(() => {
-      // Animate background and title color on scroll
+      // Animate background and title color on scroll based on theme
       gsap.to(wrapper, {
-        backgroundColor: "#0c0c1d", // Deep night sky blue
+        backgroundColor: theme === "light" ? "#87CEEB" : "#0c0c1d", // Sky blue or Night blue
         scrollTrigger: {
           trigger: wrapper,
           start: "top 80%",
@@ -64,7 +66,7 @@ const Achievements = () => {
         },
       });
       gsap.to(".achievements-title", {
-        color: "#f1f1f1", // Light text color
+        color: theme === "light" ? "#1f1f1f" : "#f1f1f1", // dark or Light text
         scrollTrigger: {
           trigger: wrapper,
           start: "top 80%",
@@ -72,7 +74,7 @@ const Achievements = () => {
           scrub: 1,
         },
       });
-      // Fade in the night scene
+      // Fade in the scene
       gsap.to(".night-scene-wrapper", {
         opacity: 1,
         scrollTrigger: {
@@ -85,7 +87,7 @@ const Achievements = () => {
     }, wrapperRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [theme]);
 
   useEffect(() => {
     const stickySection = sectionRef.current;
@@ -184,7 +186,7 @@ const Achievements = () => {
 
   return (
     <div className="achievements-section-wrapper" ref={wrapperRef}>
-      <NightScene />
+      <NightScene theme={theme} />
       <h2 className="achievements-title">Key Highlights</h2>
       <section ref={sectionRef} className="sticky-cards-section">
         <div ref={headerRef} className="sticky-header">

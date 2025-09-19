@@ -58,6 +58,18 @@
   left: 40%;
 }
 
+/* Sun */
+.sun {
+  position: absolute;
+  width: clamp(100px, 12vw, 150px);
+  height: clamp(100px, 12vw, 150px);
+  background: #ffd700;
+  border-radius: 50%;
+  top: 15%;
+  left: 15%;
+  box-shadow: 0 0 40px 10px #ffd700, 0 0 60px 20px rgba(255, 223, 0, 0.5);
+}
+
 /* Mountains */
 .mountain-bg {
   position: absolute;
@@ -160,4 +172,150 @@
 .t9 {
   left: 70%;
   transform: scale(1.05);
+}
+
+/* Day Scene Styles */
+.day-scene .star {
+  display: none;
+}
+
+/* Day Mountains */
+.day-scene .mountain-1 {
+  border-bottom-color: #6b8e23; /* olive drab */
+}
+.day-scene .mountain-2 {
+  border-bottom-color: #556b2f; /* dark olive green */
+}
+.day-scene .mountain-3 {
+  border-bottom-color: #8fbc8f; /* dark sea green */
+}
+
+/* Day Trees */
+.day-scene .l1 {
+  border-bottom-color: #228b22; /* forest green */
+}
+.day-scene .l2 {
+  border-bottom-color: #006400; /* dark green */
+}
+.day-scene .l3 {
+  border-bottom-color: #008000; /* green */
+}
+.day-scene .tree::after {
+  background: #5c4033; /* dark brown for tree trunk */
+}
+
+/* Clouds */
+.clouds {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.cloud {
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: drift linear infinite;
+}
+
+.cloud::before,
+.cloud::after {
+  content: "";
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+}
+
+.cloud-1 {
+  width: 120px;
+  height: 40px;
+  top: 20%;
+  animation-duration: 45s;
+}
+.cloud-1::before {
+  width: 60px;
+  height: 60px;
+  top: -30px;
+  left: 20px;
+}
+.cloud-1::after {
+  width: 80px;
+  height: 80px;
+  top: -40px;
+  right: 10px;
+}
+
+.cloud-2 {
+  width: 150px;
+  height: 50px;
+  top: 35%;
+  animation-duration: 60s;
+  animation-delay: -15s;
+}
+.cloud-2::before {
+  width: 80px;
+  height: 80px;
+  top: -40px;
+  left: 30px;
+}
+.cloud-2::after {
+  width: 100px;
+  height: 100px;
+  top: -50px;
+  right: 20px;
+}
+
+.cloud-3 {
+  width: 100px;
+  height: 30px;
+  top: 50%;
+  animation-duration: 75s;
+  transform: scale(0.8);
+}
+.cloud-3::before {
+  width: 50px;
+  height: 50px;
+  top: -25px;
+  left: 15px;
+}
+.cloud-3::after {
+  width: 70px;
+  height: 70px;
+  top: -35px;
+  right: 5px;
+}
+
+.cloud-4 {
+  width: 180px;
+  height: 60px;
+  top: 10%;
+  animation-duration: 90s;
+  animation-delay: -30s;
+  transform: scale(1.2);
+}
+.cloud-4::before {
+  width: 90px;
+  height: 90px;
+  top: -45px;
+  left: 40px;
+}
+.cloud-4::after {
+  width: 120px;
+  height: 120px;
+  top: -60px;
+  right: 30px;
+}
+
+@keyframes drift {
+  from {
+    transform: translateX(-200px);
+  }
+  to {
+    transform: translateX(100vw);
+  }
 }

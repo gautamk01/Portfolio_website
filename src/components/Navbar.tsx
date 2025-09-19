@@ -5,6 +5,7 @@ import gsap from "gsap";
 import Link from "next/link";
 import Image from "next/image";
 import "./Navbar.css";
+import ThemeToggle from "./ThemeToggle";
 
 interface NavbarProps {
   isOpen: boolean;
@@ -114,6 +115,7 @@ const Navbar: React.FC<NavbarProps> = ({ isOpen, onToggle }) => {
         </div>
 
         <div className="nav-right">
+          <ThemeToggle />
           <div className="menu-toggle">
             <div className="burger-menu">
               <span className="burger-line line1"></span>

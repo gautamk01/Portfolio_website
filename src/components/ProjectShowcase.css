@@ -28,7 +28,7 @@
 
 .projects-subtitle {
   font-size: clamp(1rem, 2vw, 1.2rem);
-  color: rgba(31, 31, 31, 0.7);
+  color: var(--fg-muted);
   max-width: 600px;
   margin: 0 auto;
   line-height: 1.6;
@@ -59,7 +59,7 @@
   flex-shrink: 0;
   width: var(--card-width);
   height: clamp(400px, 60vh, 500px);
-  background-color: #fff;
+  background-color: var(--card-bg);
   border-radius: 1rem;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   overflow: hidden;
@@ -90,7 +90,7 @@
 
 .project-content p {
   font-size: clamp(0.9rem, 1.5vw, 1rem);
-  color: rgba(31, 31, 31, 0.7);
+  color: var(--fg-muted);
   line-height: 1.6;
   flex-grow: 1;
 }

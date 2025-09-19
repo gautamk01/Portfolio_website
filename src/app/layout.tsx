@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import "../style.css";
+import { ThemeProvider } from "@/contexts/ThemeProvider";
 
 export const metadata: Metadata = {
   title: "GK - Computer Science Portfolio",
@@ -14,7 +15,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
     </html>
   );
 }

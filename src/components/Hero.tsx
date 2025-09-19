@@ -88,9 +88,11 @@ const Hero = () => {
               priority
             />
           </div>
-          <div className="floating-card card-1">💻 Full Stack Development</div>
-          <div className="floating-card card-2">🎯 Problem Solving</div>
-          <div className="floating-card card-3">🚀 System Architecture</div>
+          <div className="floating-cards-wrapper">
+            <div className="floating-card card-1">💻 Full Stack Development</div>
+            <div className="floating-card card-2">🎯 Problem Solving</div>
+            <div className="floating-card card-3">🚀 System Architecture</div>
+          </div>
         </div>
       </div>
     </section>

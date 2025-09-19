@@ -73,11 +73,11 @@ const AboutMe = () => {
         <div className="portfolio-content-wrapper">
           <div className="portfolio-anime-text">
             <p ref={textRef}>
-              I'm a creative technologist bridging the gap between innovative
-              technology and user-centric design. Pursuing my M.Tech in Big Data
-              Analytics from VIT, I thrive on crafting intuitive digital
-              experiences and leveraging data to build impactful solutions with
-              a focus on sustainability.
+              I operate at the intersection of code and creativity, transforming
+              complex data into elegant, human-centered experiences. As an
+              M.Tech candidate in Big Data Analytics at VIT, I blend the art of
+              design with the science of data to forge sustainable and impactful
+              solutions that truly resonate.
             </p>
           </div>
           <div ref={imageRef} className="portfolio-image-container">

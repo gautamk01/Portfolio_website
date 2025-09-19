@@ -38,7 +38,7 @@
 
 .sticky-header h1 {
   margin: 0;
-  color: rgba(255, 255, 255, 0.05); /* Very subtle text for dark bg */
+  color: rgba(0, 0, 0, 0.05); /* Dark subtle text for light bg */
   font-size: 20vw;
   font-weight: 600;
   letter-spacing: -0.05em;
@@ -54,10 +54,12 @@
   min-height: 420px;
   max-height: 480px;
 
-  /* Glassmorphism effect for dark background */
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  /* Day Scene Card Styles */
+  background: rgba(255, 255, 255, 0.6); /* More opaque white */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
 
   border-radius: 1.5rem;
   padding: 1.5rem;
@@ -66,16 +68,12 @@
   opacity: 0;
   display: flex;
   flex-direction: column;
-
-  /* Glowing border effect */
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
   transition: box-shadow 0.5s ease;
 }
 
 /* Active state for the card */
 .sticky-card.is-active {
-  box-shadow: 0 0 80px 10px rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 60px 10px rgba(0, 0, 0, 0.1);
 }
 
 .sticky-card .card-img {
@@ -105,7 +103,7 @@
   font-weight: 500;
   letter-spacing: -0.02em;
   margin-bottom: 1rem;
-  color: #fff;
+  color: #1f1f1f;
   line-height: 1.2;
 }
 
@@ -114,7 +112,7 @@
   font-weight: 400;
   letter-spacing: -0.01em;
   line-height: 1.5;
-  color: #d1d5db; /* Lighter gray */
+  color: rgba(31, 31, 31, 0.8);
   margin: 0;
 }
 
@@ -147,4 +145,30 @@
   .sticky-card .card-content p {
     font-size: 0.9rem;
   }
+}
+
+/* Styles for Night Scene (Dark Mode) */
+body.dark .sticky-header h1 {
+  color: rgba(255, 255, 255, 0.05); /* Very subtle text for dark bg */
+}
+
+body.dark .sticky-card {
+  /* Glassmorphism effect for dark background */
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+}
+
+body.dark .sticky-card.is-active {
+  box-shadow: 0 0 80px 10px rgba(255, 255, 255, 0.15);
+}
+
+body.dark .sticky-card .card-content h2 {
+  color: #fff;
+}
+
+body.dark .sticky-card .card-content p {
+  color: #d1d5db; /* Lighter gray */
 }

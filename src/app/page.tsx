@@ -14,12 +14,14 @@ import { MdEmail } from "react-icons/md";
 import "./page.css";
 import Hero from "../components/Hero";
 import LikeButton from "../components/LikeButton";
+import { useTheme } from "../contexts/ThemeProvider";
 
 const Home: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const lenisRef = useRef<Lenis | null>(null);
   const contactRef = useRef<HTMLElement>(null);
+  const { theme } = useTheme();
 
   // Effect for the initial loading animation
   useEffect(() => {
@@ -62,39 +64,12 @@ const Home: React.FC = () => {
     }
   }, [isMenuOpen]);
 
-  // Effect for contact section background transition and content fade-in
+  // Effect for contact section content fade-in
   useEffect(() => {
     const contactSection = contactRef.current;
     if (!contactSection) return;
 
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: contactSection,
-          start: "top 50%", // Start when the top of the section is at the middle of the screen
-          end: "top 20%",   // End when it's near the top
-          scrub: true,
-        },
-      });
-
-      // Animate background color
-      tl.to(contactSection, {
-        backgroundColor: "#f1efe7", // to light
-        color: "#1f1f1f", // to dark text
-      })
-        .to(
-          ".contact-new__subtitle",
-          { color: "rgba(31, 31, 31, 0.7)" },
-          "<"
-        )
-        .to(
-          ".contact-new__footer-text",
-          { color: "rgba(31, 31, 31, 0.6)" },
-          "<"
-        )
-        .to(".contact-new__socials a", { color: "#1f1f1f" }, "<")
-        .to(".contact-new__footer-text a", { color: "#1f1f1f" }, "<");
-
       // Animate content fade-in
       gsap.fromTo(
         ".contact-new__layout",
