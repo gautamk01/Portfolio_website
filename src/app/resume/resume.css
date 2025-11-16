@@ -58,14 +58,32 @@
 
 .theme-toggle {
   cursor: pointer;
-  background: rgba(37, 99, 235, 0.08);
-  border-color: transparent;
-  color: #1d4ed8;
+  background: var(--theme-toggle-bg, rgba(37, 99, 235, 0.08));
+  border: 1px solid var(--theme-toggle-border, transparent);
+  color: var(--theme-toggle-color, #1d4ed8);
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 .resume-page.dark .theme-toggle {
-  background: rgba(56, 189, 248, 0.15);
-  color: #7dd3fc;
+  --theme-toggle-bg: rgba(56, 189, 248, 0.15);
+  --theme-toggle-color: #7dd3fc;
+  --theme-toggle-border: rgba(56, 189, 248, 0.3);
+}
+
+.theme-toggle:hover {
+  background: var(--theme-toggle-bg-hover, rgba(37, 99, 235, 0.15));
+  border-color: var(--theme-toggle-border-hover, rgba(37, 99, 235, 0.3));
+}
+
+.resume-page.dark .theme-toggle:hover {
+  --theme-toggle-bg-hover: rgba(56, 189, 248, 0.25);
+  --theme-toggle-border-hover: rgba(56, 189, 248, 0.5);
+}
+
+.theme-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .resume-eyebrow {
