@@ -1,23 +1,20 @@
-/* New Project Showcase Styles */
 .projects-section {
   position: relative;
   width: 100%;
   background-color: var(--bg);
   color: var(--fg);
-  overflow: hidden; /* Crucial for horizontal scroll */
-  
-  /* Make section a full-height flex container */
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   height: 100vh;
-  padding: clamp(6rem, 15vh, 10rem) 0 0;
+  padding: clamp(4rem, 10vh, 8rem) 0;
 }
 
 .projects-header-container {
   text-align: center;
   padding: 0 2rem;
-  margin-bottom: 4rem;
-  flex-shrink: 0; /* Prevent header from shrinking */
+  margin-bottom: clamp(2rem, 5vh, 4rem);
+  flex-shrink: 0;
 }
 
 .projects-title {
@@ -38,19 +35,15 @@
   width: 100%;
   display: flex;
   align-items: center;
-  
-  /* Allow container to fill remaining space */
   flex-grow: 1;
-  min-height: 0; /* Fix for flexbox overflow issues */
+  min-height: 0;
 }
 
 .projects-wrapper {
   display: flex;
   align-items: center;
   gap: clamp(2rem, 4vw, 4rem);
-  /* Define card width as a variable for reuse */
   --card-width: clamp(300px, 60vw, 550px);
-  /* Calculate padding to center the first and last cards */
   padding: 0 calc(50vw - var(--card-width) / 2);
   will-change: transform;
 }
@@ -99,38 +92,117 @@
   margin-top: 1rem;
   display: flex;
   gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
-.project-links a {
+.project-links a,
+.details-btn {
   padding: 0.5rem 1.25rem;
   border-radius: 99px;
   text-decoration: none;
   font-weight: 600;
   transition: all 0.3s ease;
   font-size: 0.9rem;
+  border: none;
+  cursor: pointer;
 }
 
-.project-links a:first-child {
+.details-btn {
   background-color: var(--fg);
   color: var(--bg);
 }
 
-.project-links a:last-child {
+.project-links a {
   background-color: transparent;
   color: var(--fg);
   box-shadow: inset 0 0 0 1px var(--fg);
 }
 
-.project-links a:hover {
+.project-links a:hover,
+.details-btn:hover {
   transform: translateY(-2px);
   filter: brightness(1.1);
 }
 
-/* Responsive */
+/* Scroll Hint */
+.scroll-hint {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--fg-muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 10;
+}
+
+.scroll-hint span {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.mouse-icon {
+  width: 24px;
+  height: 40px;
+  border: 2px solid var(--fg-muted);
+  border-radius: 12px;
+  position: relative;
+}
+
+.mouse-wheel {
+  width: 4px;
+  height: 8px;
+  background-color: var(--fg-muted);
+  border-radius: 2px;
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: scroll-pulse 2s infinite;
+}
+
+@keyframes scroll-pulse {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, 10px);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, 10px);
+  }
+}
+
+/* Progress Bar */
+.projects-progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 4px;
+  width: 100%;
+  background-color: var(--border-color);
+}
+
+.projects-progress-bar-inner {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #4285F4, #EA4335, #FBBC05, #34A853);
+  will-change: width;
+}
+
 @media (max-width: 768px) {
   .projects-section {
-    height: 100dvh;
-    padding: 4rem 0 0;
+    height: auto;
+    min-height: 100dvh;
+    padding: 4rem 0;
   }
   .projects-header-container {
     margin-bottom: 2rem;

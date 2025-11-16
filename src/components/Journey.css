@@ -222,6 +222,24 @@
   object-fit: cover;
 }
 
+.image-loading-overlay {
+  position: absolute;
+  top: 45px; /* Adjust to be below the browser header */
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(30, 30, 30, 0.7); /* Semi-transparent dark background */
+  color: white;
+  z-index: 10;
+  font-size: 1.2rem;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 0 0 0.75rem 0.75rem;
+}
+
 /* Responsive */
 @media (max-width: 900px) {
   .journey-layout {

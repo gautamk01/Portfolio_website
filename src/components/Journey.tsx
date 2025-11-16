@@ -149,9 +149,47 @@ const Journey = () => {
   const [activeImage, setActiveImage] = useState(
     journeyData[0].events[0].imageSrc
   );
+  const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
   const sectionRef = useRef<HTMLDivElement>(null);
-  const imageRef = useRef<HTMLImageElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
   const progressLineRef = useRef<HTMLDivElement>(null);
+  const activeImageRef = useRef(activeImage);
+
+  // Get all unique image sources
+  const allImageSrcs = React.useMemo(() => {
+    const srcs = new Set<string>();
+    journeyData.forEach((data) => {
+      data.events.forEach((event) => {
+        srcs.add(event.imageSrc);
+      });
+    });
+    return Array.from(srcs);
+  }, []);
+
+  useEffect(() => {
+    activeImageRef.current = activeImage;
+  }, [activeImage]);
+
+  // Preload images after initial render
+  useEffect(() => {
+    const preloadImages = () => {
+      allImageSrcs.forEach((src) => {
+        if (src !== journeyData[0].events[0].imageSrc) {
+          const img = new window.Image();
+          img.src = src;
+          img.onload = () => {
+            setLoadedImages((prev) => new Set([...prev, src]));
+          };
+        }
+      });
+    };
+
+    // Start preloading after a short delay to prioritize initial render
+    const timeoutId = setTimeout(preloadImages, 100);
+    return () => clearTimeout(timeoutId);
+  }, [allImageSrcs]);
 
   useEffect(() => {
     const eventItems = gsap.utils.toArray<HTMLElement>(".timeline-event-item");
@@ -161,7 +199,6 @@ const Journey = () => {
     if (!section || !progressLine) return;
 
     const ctx = gsap.context(() => {
-      // Animate the glowing progress line
       gsap.to(progressLine, {
         scaleY: 1,
         ease: "none",
@@ -173,7 +210,6 @@ const Journey = () => {
         },
       });
 
-      // Animate each event item fading in
       eventItems.forEach((item) => {
         gsap.from(item, {
           opacity: 0,
@@ -187,7 +223,6 @@ const Journey = () => {
           },
         });
 
-        // Update the sticky image based on which event is in view
         ScrollTrigger.create({
           trigger: item,
           start: "top center",
@@ -195,15 +230,25 @@ const Journey = () => {
           onToggle: (self) => {
             if (self.isActive) {
               const newImage = item.dataset.image;
-              if (newImage && newImage !== activeImage) {
-                gsap.to(imageRef.current, {
-                  opacity: 0,
-                  duration: 0.3,
-                  onComplete: () => {
-                    setActiveImage(newImage);
-                    gsap.to(imageRef.current, { opacity: 1, duration: 0.3 });
-                  },
-                });
+              if (newImage && newImage !== activeImageRef.current) {
+                // Only animate if image is already loaded or is the first image
+                const shouldAnimate =
+                  loadedImages.has(newImage) ||
+                  newImage === journeyData[0].events[0].imageSrc;
+
+                if (shouldAnimate) {
+                  setIsTransitioning(true);
+                  gsap.to(imageRef.current, {
+                    opacity: 0,
+                    duration: 0.2,
+                    onComplete: () => {
+                      setActiveImage(newImage);
+                    },
+                  });
+                } else {
+                  // If not loaded, just switch without animation
+                  setActiveImage(newImage);
+                }
               }
             }
           },
@@ -212,7 +257,25 @@ const Journey = () => {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, [activeImage]);
+  }, [loadedImages]);
+
+  const handleImageLoad = () => {
+    if (imageRef.current && isTransitioning) {
+      gsap.to(imageRef.current, {
+        opacity: 1,
+        duration: 0.3,
+        ease: "power2.inOut",
+        onComplete: () => setIsTransitioning(false),
+      });
+    } else if (imageRef.current) {
+      // Initial load
+      gsap.to(imageRef.current, {
+        opacity: 1,
+        duration: 0.4,
+        ease: "power2.inOut",
+      });
+    }
+  };
 
   return (
     <section className="journey-section-new" ref={sectionRef}>
@@ -257,6 +320,8 @@ const Journey = () => {
                           width={800}
                           height={600}
                           className="timeline-event-img"
+                          loading="lazy"
+                          sizes="(max-width: 768px) 100vw, 800px"
                         />
                       </div>
                     </div>
@@ -276,14 +341,19 @@ const Journey = () => {
                     <span></span>
                   </div>
                 </div>
-                <Image
-                  ref={imageRef}
-                  src={activeImage}
-                  alt="Timeline visual"
-                  width={800}
-                  height={600}
-                  className="browser-image"
-                />
+                <div ref={imageRef} style={{ opacity: 0 }}>
+                  <Image
+                    src={activeImage}
+                    alt="Timeline visual"
+                    width={800}
+                    height={600}
+                    className="browser-image"
+                    onLoad={handleImageLoad}
+                    priority={activeImage === journeyData[0].events[0].imageSrc}
+                    sizes="(max-width: 1024px) 0vw, 50vw"
+                    quality={85}
+                  />
+                </div>
               </div>
             </div>
           </div>
