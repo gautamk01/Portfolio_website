@@ -50,7 +50,9 @@ const projects = [
 const ProjectShowcase = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const projectsWrapperRef = useRef<HTMLDivElement>(null);
-  const [selectedProject, setSelectedProject] = useState<(typeof projects)[0] | null>(null);
+  const [selectedProject, setSelectedProject] = useState<
+    (typeof projects)[0] | null
+  >(null);
   const hintRef = useRef<HTMLDivElement>(null);
   const progressBarRef = useRef<HTMLDivElement>(null);
 
@@ -61,7 +63,14 @@ const ProjectShowcase = () => {
     const hint = hintRef.current;
     const progressBar = progressBarRef.current;
 
-    if (!section || !projectsWrapper || cards.length === 0 || !hint || !progressBar) return;
+    if (
+      !section ||
+      !projectsWrapper ||
+      cards.length === 0 ||
+      !hint ||
+      !progressBar
+    )
+      return;
 
     const scrollDistance = projectsWrapper.scrollWidth - window.innerWidth;
 
@@ -77,7 +86,10 @@ const ProjectShowcase = () => {
         end: () => `+=${scrollDistance}`,
         invalidateOnRefresh: true,
         onUpdate: (self) => {
-          gsap.to(progressBar, { width: `${self.progress * 100}%`, ease: "none" });
+          gsap.to(progressBar, {
+            width: `${self.progress * 100}%`,
+            ease: "none",
+          });
 
           if (self.progress > 0.01 && self.direction > 0) {
             gsap.to(hint, { autoAlpha: 0, duration: 0.3 });
@@ -95,7 +107,12 @@ const ProjectShowcase = () => {
             const scale = gsap.utils.mapRange(0, 1, 0.9, 1)(progress);
             const opacity = gsap.utils.mapRange(0, 1, 0.7, 1)(progress);
 
-            gsap.to(card, { scale, opacity, duration: 0.5, ease: "power3.out" });
+            gsap.to(card, {
+              scale,
+              opacity,
+              duration: 0.5,
+              ease: "power3.out",
+            });
           });
         },
       },
@@ -127,7 +144,7 @@ const ProjectShowcase = () => {
                     alt={project.name}
                     fill
                     sizes="(max-width: 768px) 80vw, 60vw"
-                    style={{ objectFit: "cover" }}
+                    className="project-image"
                   />
                 </div>
                 <div className="project-content">
@@ -167,7 +184,10 @@ const ProjectShowcase = () => {
           </div>
         </div>
         <div className="projects-progress-bar">
-          <div ref={progressBarRef} className="projects-progress-bar-inner"></div>
+          <div
+            ref={progressBarRef}
+            className="projects-progress-bar-inner"
+          ></div>
         </div>
       </section>
       {selectedProject && (

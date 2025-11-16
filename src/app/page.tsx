@@ -3,7 +3,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import Navbar from "../components/Navbar";
 import AboutMe from "../components/AboutMe";
-import Achievements from "../components/Achievements";
+import BlogPreview from "../components/BlogPreview";
 import ProjectShowcase from "../components/ProjectShowcase";
 import Journey from "../components/Journey";
 import Lenis from "lenis";
@@ -14,14 +14,13 @@ import { MdEmail } from "react-icons/md";
 import "./page.css";
 import Hero from "../components/Hero";
 import LikeButton from "../components/LikeButton";
-import { useTheme } from "../contexts/ThemeProvider";
+import Achievements from "@/components/Achievements";
 
 const Home: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const lenisRef = useRef<Lenis | null>(null);
   const contactRef = useRef<HTMLElement>(null);
-  const { theme } = useTheme();
 
   // Effect for the initial loading animation
   useEffect(() => {
@@ -102,7 +101,9 @@ const Home: React.FC = () => {
         <AboutMe />
         <Journey />
         <ProjectShowcase />
+
         <Achievements />
+        <BlogPreview />
         <section ref={contactRef} className="contact-new" id="contact">
           <div className="contact-new__layout">
             <header className="contact-new__header">
