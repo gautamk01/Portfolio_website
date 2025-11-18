@@ -224,28 +224,55 @@
     padding: 4rem 0;
   }
   .projects-header-container {
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
+    padding: 0 1.5rem;
   }
   .projects-wrapper {
-    --card-width: 75vw;
-    gap: 1.5rem;
+    --card-width: 85vw;
+    gap: 1rem;
   }
   .project-card {
     height: auto;
-    min-height: 450px;
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
   }
   .project-image-container {
-    height: 250px; /* Explicit height for mobile */
+    height: 220px; /* Slightly reduced height */
+  }
+  .project-content {
+    padding: 1.25rem;
   }
   .project-content h3 {
-    font-size: 1.5rem;
+    font-size: 1.35rem;
+    margin-bottom: 0.25rem;
   }
   .project-content p {
-    font-size: 1rem;
+    font-size: 0.95rem;
+    margin-bottom: 1.25rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
   .project-links {
-    flex-direction: column;
-    align-items: stretch;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .project-links a,
+  .details-btn {
+    flex: 1;
+    padding: 0.75rem 1rem;
     text-align: center;
+    white-space: nowrap;
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .details-btn {
+    flex-basis: 100%; /* Full width for primary action */
+    order: -1; /* Ensure it's first */
   }
 }

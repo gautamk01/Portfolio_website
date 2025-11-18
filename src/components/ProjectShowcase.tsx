@@ -11,11 +11,37 @@ gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
   {
-    name: "Silent Arc",
-    img: "/p1.png",
-    desc: "A sleek and modern web application for silent auction events, providing a seamless bidding experience.",
+    name: "AI.Meet",
+    img: "/project1/Logo.png",
+    desc: "AI Meet is a modern video conferencing application designed for interacting with AI agents. It allows users to create customized AI agents, conduct real-time video meetings with them, and receive automated, AI-generated summaries of the conversations.",
     liveUrl: "#",
     gitUrl: "#",
+    gallery: [
+      {
+        img: "/project1/Logo.png",
+        caption: "AI.Meet Logo",
+      },
+      {
+        img: "/project1/p1.png",
+        caption: "Main Dashboard showing meeting agents",
+      },
+      {
+        img: "/p2.png",
+        caption: "Agent Creation Screen",
+      },
+    ],
+    techStack: [
+      "Next.js",
+      "TypeScript",
+      "PostgreSQL",
+      "Drizzle ORM",
+      "tRPC",
+      "Better Auth",
+      "Stream Video SDK",
+      "Inngest",
+      "OpenAI",
+      "Tailwind CSS",
+    ],
   },
   {
     name: "Bloom24",
