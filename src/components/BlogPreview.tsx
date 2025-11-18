@@ -6,13 +6,12 @@ import { useRouter } from "next/navigation";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./BlogPreview.css";
-import { useTheme } from "../contexts/ThemeProvider";
 import { blogPosts } from "../lib/blogData";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const BlogPreview = () => {
-  const { theme } = useTheme();
+  // const { theme } = useTheme(); // theme is unused
   const wrapperRef = useRef<HTMLElement>(null);
   const router = useRouter();
 

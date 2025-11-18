@@ -14,7 +14,7 @@ import { MdEmail } from "react-icons/md";
 import "./page.css";
 import Hero from "../components/Hero";
 import LikeButton from "../components/LikeButton";
-import Achievements from "@/components/Achievements";
+// import Achievements from "@/components/Achievements"; // Removing or commenting out import
 
 const Home: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

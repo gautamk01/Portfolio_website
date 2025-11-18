@@ -95,6 +95,10 @@ const Hero = () => {
           },
           "-=1"
         );
+
+        return () => {
+            titleText.revert();
+        };
     }, heroRef);
 
     return () => ctx.revert(); // cleanup
