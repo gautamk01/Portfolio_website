@@ -149,11 +149,8 @@ const Journey = () => {
   const [activeImage, setActiveImage] = useState(
     journeyData[0].events[0].imageSrc
   );
-  const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
-  const [isTransitioning, setIsTransitioning] = useState(false);
 
   const sectionRef = useRef<HTMLDivElement>(null);
-  const imageRef = useRef<HTMLDivElement>(null);
   const progressLineRef = useRef<HTMLDivElement>(null);
   const activeImageRef = useRef(activeImage);
 
@@ -171,25 +168,6 @@ const Journey = () => {
   useEffect(() => {
     activeImageRef.current = activeImage;
   }, [activeImage]);
-
-  // Preload images after initial render
-  useEffect(() => {
-    const preloadImages = () => {
-      allImageSrcs.forEach((src) => {
-        if (src !== journeyData[0].events[0].imageSrc) {
-          const img = new window.Image();
-          img.src = src;
-          img.onload = () => {
-            setLoadedImages((prev) => new Set([...prev, src]));
-          };
-        }
-      });
-    };
-
-    // Start preloading after a short delay to prioritize initial render
-    const timeoutId = setTimeout(preloadImages, 100);
-    return () => clearTimeout(timeoutId);
-  }, [allImageSrcs]);
 
   useEffect(() => {
     const eventItems = gsap.utils.toArray<HTMLElement>(".timeline-event-item");
@@ -231,24 +209,7 @@ const Journey = () => {
             if (self.isActive) {
               const newImage = item.dataset.image;
               if (newImage && newImage !== activeImageRef.current) {
-                // Only animate if image is already loaded or is the first image
-                const shouldAnimate =
-                  loadedImages.has(newImage) ||
-                  newImage === journeyData[0].events[0].imageSrc;
-
-                if (shouldAnimate) {
-                  setIsTransitioning(true);
-                  gsap.to(imageRef.current, {
-                    opacity: 0,
-                    duration: 0.2,
-                    onComplete: () => {
-                      setActiveImage(newImage);
-                    },
-                  });
-                } else {
-                  // If not loaded, just switch without animation
-                  setActiveImage(newImage);
-                }
+                setActiveImage(newImage);
               }
             }
           },
@@ -257,25 +218,7 @@ const Journey = () => {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, [loadedImages]);
-
-  const handleImageLoad = () => {
-    if (imageRef.current && isTransitioning) {
-      gsap.to(imageRef.current, {
-        opacity: 1,
-        duration: 0.3,
-        ease: "power2.inOut",
-        onComplete: () => setIsTransitioning(false),
-      });
-    } else if (imageRef.current) {
-      // Initial load
-      gsap.to(imageRef.current, {
-        opacity: 1,
-        duration: 0.4,
-        ease: "power2.inOut",
-      });
-    }
-  };
+  }, []);
 
   return (
     <section className="journey-section-new" ref={sectionRef}>
@@ -341,18 +284,27 @@ const Journey = () => {
                     <span></span>
                   </div>
                 </div>
-                <div ref={imageRef} style={{ opacity: 0 }}>
-                  <Image
-                    src={activeImage}
-                    alt="Timeline visual"
-                    width={800}
-                    height={600}
-                    className="browser-image"
-                    onLoad={handleImageLoad}
-                    priority={activeImage === journeyData[0].events[0].imageSrc}
-                    sizes="(max-width: 1024px) 0vw, 50vw"
-                    quality={85}
-                  />
+                <div className="browser-image-wrapper">
+                  {allImageSrcs.map((src, index) => (
+                    <div
+                      key={src}
+                      className="browser-image-stacked"
+                      style={{
+                        opacity: src === activeImage ? 1 : 0,
+                        zIndex: src === activeImage ? 1 : 0,
+                      }}
+                    >
+                      <Image
+                        src={src}
+                        alt="Timeline visual"
+                        fill
+                        className="browser-image-stacked"
+                        sizes="(max-width: 1024px) 0vw, 50vw"
+                        priority={index === 0}
+                        quality={85}
+                      />
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
