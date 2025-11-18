@@ -102,7 +102,7 @@ const Home: React.FC = () => {
         <Journey />
         <ProjectShowcase />
 
-        <Achievements />
+        {/* <Achievements /> */}
         <BlogPreview />
         <section ref={contactRef} className="contact-new" id="contact">
           <div className="contact-new__layout">

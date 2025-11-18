@@ -13,6 +13,8 @@
   --card-bg: #fff;
   --card-header-bg: #f1f5f9;
   --scrolled-nav-bg: rgba(18, 18, 18, 0.8);
+  --accent-color: #2563eb;
+  --accent-color-rgb: 37, 99, 235;
 }
 
 body.dark {
@@ -25,6 +27,8 @@ body.dark {
   --card-bg: #1e1e1e;
   --card-header-bg: #2a2a2a;
   --scrolled-nav-bg: rgba(255, 255, 255, 0.8);
+  --accent-color: #38bdf8;
+  --accent-color-rgb: 56, 189, 248;
 }
 
 * {

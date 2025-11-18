@@ -4,33 +4,7 @@ import React from "react";
 import Link from "next/link";
 import "./BlogPreview.css";
 import { useTheme } from "../contexts/ThemeProvider";
-
-const blogPosts = [
-  {
-    title: "Demystifying React's Concurrent Mode",
-    category: "Technical Deep Dive",
-    date: "October 28, 2025",
-    excerpt:
-      "A deep-dive into the internals of React's Concurrent Mode, with practical examples and interactive demos to showcase its power.",
-    link: "#",
-  },
-  {
-    title: "Building Performant Data Visualizations with D3 and React",
-    category: "Frontend Engineering",
-    date: "September 15, 2025",
-    excerpt:
-      "Exploring techniques for creating smooth, scalable, and interactive data visualizations by combining the strengths of D3.js and React.",
-    link: "#",
-  },
-  {
-    title: "A Guide to Full-Stack Development with Next.js",
-    category: "Web Development",
-    date: "August 02, 2025",
-    excerpt:
-      "From server-side rendering to API routes, this guide covers everything you need to know to build and deploy a modern web app with Next.js.",
-    link: "#",
-  },
-];
+import { blogPosts } from "../lib/blogData";
 
 const BlogPreview = () => {
   const { theme } = useTheme();
@@ -57,10 +31,10 @@ const BlogPreview = () => {
 
         <div className="blog-grid">
           {blogPosts.map((post) => (
-            <a 
-              href={post.link} 
+            <Link 
+              href={`/blog/${post.slug}`}
               className="blog-card"
-              key={post.title}
+              key={post.slug}
             >
               <header className="blog-card-header">
                 <p className="category">
@@ -81,7 +55,7 @@ const BlogPreview = () => {
                   {post.date}
                 </span>
               </footer>
-            </a>
+            </Link>
           ))}
         </div>
         <div className="view-more-container">

@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import gsap from "gsap";
-import { ChevronLeft, ChevronRight, Database, Server, Video, Workflow, ShieldCheck, Cpu } from "lucide-react";
+import { ChevronLeft, ChevronRight, Database, Video, Workflow, ShieldCheck, Cpu } from "lucide-react";
 import { SiNextdotjs, SiTypescript, SiPostgresql, SiTailwindcss, SiOpenai, SiTrpc } from "react-icons/si";
 import "./ProjectDetailModal.css";
 
@@ -31,21 +31,21 @@ const getTechIcon = (tech: string) => {
     case "PostgreSQL":
       return <SiPostgresql title="PostgreSQL" />;
     case "Drizzle ORM":
-      return <Database title="Drizzle ORM" />;
+      return <Database />;
     case "tRPC":
       return <SiTrpc title="tRPC" />;
     case "Better Auth":
-      return <ShieldCheck title="Better Auth" />;
+      return <ShieldCheck />;
     case "Stream Video SDK":
-      return <Video title="Stream Video SDK" />;
+      return <Video />;
     case "Inngest":
-      return <Workflow title="Inngest" />;
+      return <Workflow />;
     case "OpenAI":
       return <SiOpenai title="OpenAI" />;
     case "Tailwind CSS":
       return <SiTailwindcss title="Tailwind CSS" />;
     default:
-      return <Cpu title={tech} />;
+      return <Cpu />;
   }
 };
 

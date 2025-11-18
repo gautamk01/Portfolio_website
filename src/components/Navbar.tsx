@@ -112,6 +112,7 @@ const Navbar: React.FC<NavbarProps> = ({ isOpen, onToggle }) => {
         <div className="nav-center">
           <div className="nav-links">
             <Link href="/resume">Resume</Link>
+            <Link href="/blog">Blog</Link>
             <Link href="/#projects">Projects</Link>
             <Link href="/#about">About</Link>
             <Link href="/#contact">Contact</Link>
@@ -155,6 +156,16 @@ const Navbar: React.FC<NavbarProps> = ({ isOpen, onToggle }) => {
                     onClick={onToggle}
                   >
                     Resume
+                  </Link>
+                </div>
+                <div className="link">
+                  <Link
+                    href="/blog"
+                    data-img="/img-5.webp"
+                    onMouseOver={handleMouseOver}
+                    onClick={onToggle}
+                  >
+                    Blog
                   </Link>
                 </div>
                 <div className="link">
