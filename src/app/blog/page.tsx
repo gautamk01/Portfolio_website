@@ -1,15 +1,27 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { blogPosts } from "@/lib/blogData";
 import { ArrowLeft } from "lucide-react";
+import gsap from "gsap";
 import "./page.css";
 
 const BlogPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 6;
+
+  // Enter Animation
+  useEffect(() => {
+    gsap.to(".transition-slice-enter", {
+        scaleY: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: "power4.inOut",
+        delay: 0.2 // Small delay to ensure smooth transition
+    });
+  }, []);
 
   const filteredPosts = blogPosts.filter((post) =>
     post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -26,6 +38,34 @@ const BlogPage = () => {
 
   return (
     <main className="blog-page">
+       {/* Enter Transition Overlay */}
+       <div 
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100vh',
+          zIndex: 9999,
+          display: 'flex',
+          pointerEvents: 'none'
+        }}
+      >
+        {[...Array(5)].map((_, i) => (
+            <div 
+                key={i}
+                className="transition-slice-enter"
+                style={{
+                    flex: 1,
+                    height: '100%',
+                    backgroundColor: 'var(--fg)',
+                    transform: 'scaleY(1)', // Start fully covering
+                    transformOrigin: 'top',
+                }}
+            />
+        ))}
+      </div>
+
       <Link href="/" className="back-link" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: 'var(--fg-muted)', marginBottom: '2rem', textDecoration: 'none', fontSize: '0.95rem' }}>
         <ArrowLeft size={20} />
         Back to Home

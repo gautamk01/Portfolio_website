@@ -1,9 +1,9 @@
 /* New Journey Section Styles */
 .journey-section-new {
   position: relative;
+  z-index: 1;
   width: 100%;
   padding: clamp(6rem, 15vh, 10rem) 2rem;
-  background-color: var(--bg);
   color: var(--fg);
 }
 

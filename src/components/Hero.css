@@ -5,7 +5,8 @@
   justify-content: center;
   min-height: 100svh;
   padding: 6rem 2rem 4rem;
-  background-color: var(--bg);
+  position: relative; /* Sit above fixed background */
+  z-index: 1;
   overflow: hidden;
 }
 .hero-content {
@@ -36,6 +37,13 @@
   font-weight: 600;
   line-height: 1.2;
   letter-spacing: -0.05em;
+}
+.main-title .word {
+  display: inline-block;
+  margin-right: 0.2em; /* Adjust spacing between words */
+}
+.main-title .char {
+  display: inline-block;
 }
 .subtitle {
   font-size: 1.1rem;

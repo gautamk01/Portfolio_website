@@ -2,6 +2,7 @@
 import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
+import SplitType from "split-type";
 import "./Hero.css";
 
 const technologies = [
@@ -20,25 +21,80 @@ const Hero = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Split text for animation
+      const titleText = new SplitType(".main-title", { types: ["chars", "words"] });
+
       const tl = gsap.timeline({
-        defaults: { ease: "power3.out", duration: 0.8 },
+        defaults: { ease: "power3.out" },
       });
 
-      // Set initial states before animating
-      gsap.set(".hero-visual, .floating-card, .hero-text > *", {
-        autoAlpha: 0,
-      });
-      gsap.set(".hero-text > *", { y: 30 });
-      gsap.set(".hero-visual", { scale: 0.9 });
-      gsap.set(".floating-card", { scale: 0.8 });
+      // Initial States
+      gsap.set(".hero-visual", { scale: 0.8, opacity: 0 });
+      gsap.set(".floating-card", { scale: 0, opacity: 0 });
+      gsap.set(".availability-badge", { y: 20, opacity: 0 });
+      gsap.set(".main-title .char", { y: 100, opacity: 0 });
+      gsap.set(".subtitle", { y: 20, opacity: 0 });
+      gsap.set(".tech-item", { y: 20, opacity: 0 });
+      gsap.set(".cta-btn", { y: 20, opacity: 0 });
 
-      tl.to(".hero-visual", { autoAlpha: 1, scale: 1, duration: 1 })
+      tl.to(".hero-visual", {
+        scale: 1,
+        opacity: 1,
+        duration: 1.5,
+        ease: "elastic.out(1, 0.5)",
+      })
+        .to(
+          ".availability-badge",
+          { y: 0, opacity: 1, duration: 0.6 },
+          "-=1.2"
+        )
+        .to(
+          ".main-title .char",
+          {
+            y: 0,
+            opacity: 1,
+            stagger: 0.02,
+            duration: 0.8,
+            ease: "back.out(1.7)",
+          },
+          "-=1"
+        )
+        .to(
+          ".subtitle",
+          { y: 0, opacity: 1, duration: 0.8 },
+          "-=0.6"
+        )
+        .to(
+          ".tech-item",
+          {
+            y: 0,
+            opacity: 1,
+            stagger: 0.05,
+            duration: 0.6,
+          },
+          "-=0.6"
+        )
+        .to(
+          ".cta-btn",
+          {
+            y: 0,
+            opacity: 1,
+            stagger: 0.1,
+            duration: 0.6,
+          },
+          "-=0.4"
+        )
         .to(
           ".floating-card",
-          { autoAlpha: 1, scale: 1, stagger: 0.15, duration: 0.6 },
-          "-=0.7"
-        )
-        .to(".hero-text > *", { autoAlpha: 1, y: 0, stagger: 0.1 }, "-=1");
+          {
+            scale: 1,
+            opacity: 1,
+            stagger: 0.1,
+            duration: 0.8,
+            ease: "back.out(1.7)",
+          },
+          "-=1"
+        );
     }, heroRef);
 
     return () => ctx.revert(); // cleanup

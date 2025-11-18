@@ -1,101 +1,175 @@
-/* ===== PORTFOLIO ABOUT ME SECTION STYLES ===== */
-.portfolio-about {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: clamp(2rem, 5vh, 4rem) 1rem;
-  min-height: 100vh;
-  background-color: var(--bg);
+.about-section {
+  position: relative;
+  padding: clamp(6rem, 10vh, 8rem) 0;
   color: var(--fg);
-  overflow-x: hidden;
+  z-index: 1;
 }
 
-.portfolio-profile-title {
-  font-size: clamp(2rem, 8vw, 4.5rem);
-  font-weight: 500;
-  text-align: center;
-  color: var(--fg);
-  margin-bottom: clamp(1rem, 3vh, 2rem);
-}
-
-.portfolio-copy-container {
-  border: 0.15rem dashed var(--stroke);
-  border-radius: 1.5rem;
-  padding: clamp(1rem, 4vw, 2.5rem);
-  width: 90%;
+.about-container {
   max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
   display: flex;
   flex-direction: column;
+  gap: 4rem;
 }
 
-.portfolio-content-wrapper {
-  display: flex;
-  flex-direction: column;
+.about-content {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 4rem;
   align-items: center;
-  width: 100%;
-  gap: clamp(1rem, 3vh, 2rem);
 }
 
-.portfolio-image-container {
-  order: 1;
-  width: clamp(120px, 40%, 220px);
-  aspect-ratio: 1 / 1;
-  border-radius: 1.5rem;
+.about-text-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.about-title {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.text-highlight {
+  color: var(--accent-color);
+}
+
+.about-bio {
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+  line-height: 1.8; /* Increased line height */
+  color: var(--fg);
+  max-width: 65ch;
+}
+
+.about-text {
+  font-weight: 500; /* Slightly bolder */
+  letter-spacing: normal;
+}
+
+/* SplitType Helper */
+.about-text .line {
   overflow: hidden;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  flex-shrink: 0;
-  will-change: clip-path;
-  clip-path: inset(100% 0 0 0);
 }
 
-.portfolio-image-container img {
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.stat-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  padding: 1.25rem;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.stat-icon {
+  color: var(--accent-color);
+  margin-bottom: 0.25rem;
+}
+
+.stat-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--fg);
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: var(--fg-muted);
+  font-weight: 500;
+}
+
+/* Image Column */
+.about-image-col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about-image-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 450px;
+  aspect-ratio: 3/4;
+  border-radius: 1.5rem;
+  /* overflow: hidden; - removing this allows accent border to show if placed outside, but usually wrapper clips. */
+}
+
+.about-image {
+  border-radius: 1.5rem;
+  object-fit: cover;
+  z-index: 2;
+}
+
+.image-accent-border {
+  position: absolute;
+  top: 20px;
+  left: 20px;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  border: 2px solid var(--accent-color);
+  border-radius: 1.5rem;
+  z-index: 1;
+  opacity: 0.5;
+  transition: transform 0.3s ease;
 }
 
-.portfolio-anime-text {
-  order: 2;
-  width: 100%;
+.about-image-wrapper:hover .image-accent-border {
+  transform: translate(10px, 10px);
 }
 
-.portfolio-anime-text p {
-  font-weight: 500;
-  line-height: 1.6;
-  text-align: center;
-  font-size: clamp(0.95rem, 2.5vh, 1.1rem);
+.about-skills-wrapper {
+  margin-top: 2rem;
 }
 
-@media (min-width: 768px) {
-  .portfolio-content-wrapper {
-    flex-direction: row;
+/* Responsive */
+@media (max-width: 900px) {
+  .about-content {
+    grid-template-columns: 1fr;
     gap: 3rem;
+    text-align: center;
   }
-  .portfolio-image-container {
-    order: 2;
-    width: 40%;
-    max-width: 400px;
-    aspect-ratio: 1 / 1;
-  }
-  .portfolio-anime-text {
-    order: 1;
-    width: 60%;
-  }
-  .portfolio-anime-text p {
-    text-align: left;
-    font-size: clamp(1.1rem, 1.5vw, 1.25rem);
-  }
-}
 
-@media (min--width: 1024px) {
-  .portfolio-content-wrapper {
-    gap: 4rem;
+  .about-text-col {
+    align-items: center;
   }
-  .portfolio-image-container {
-    order: 1;
+
+  .about-bio {
+    margin: 0 auto;
   }
-  .portfolio-anime-text {
-    order: 2;
+
+  .about-stats {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .stat-card {
+    align-items: center;
+    text-align: center;
+  }
+
+  .about-image-wrapper {
+    max-width: 350px;
+    margin: 0 auto;
   }
 }

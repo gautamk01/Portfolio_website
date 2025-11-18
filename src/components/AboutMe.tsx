@@ -5,92 +5,130 @@ import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SplitType from "split-type";
+import { Code2, Coffee, Cpu, Trophy } from "lucide-react";
 import "./AboutMe.css";
 import Skills from "./Skills";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const stats = [
+  { icon: <Code2 size={24} />, label: "Projects", value: "10+" },
+  { icon: <Cpu size={24} />, label: "Experience", value: "2+ Years" },
+  { icon: <Trophy size={24} />, label: "Awards", value: "2x Top 5" },
+  { icon: <Coffee size={24} />, label: "Coffee", value: "Infinite" },
+];
+
 const AboutMe = () => {
-  const sectionRef = useRef(null);
-  const imageRef = useRef(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const textRef = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
     const section = sectionRef.current;
-    const image = imageRef.current;
-    const text = textRef.current;
+    if (!section) return;
 
-    if (!section || !image || !text) return;
+    const ctx = gsap.context(() => {
+      // Split text
+      new SplitType(".about-text", { types: ["lines", "words"] });
 
-    const split = new SplitType(text, { types: "words" });
-    const words = split.words;
-
-    gsap.set(words, { opacity: 0, y: 20 });
-    gsap.set(image, { clipPath: "inset(100% 0 0 0)", opacity: 0 });
-
-    const timeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: section,
-        start: "top 70%",
-        end: "bottom 40%",
-        toggleActions: "play none none reverse",
-      },
-    });
-
-    timeline
-      .to(image, {
-        clipPath: "inset(0% 0% 0% 0%)",
-        opacity: 1,
-        duration: 1.2,
-        ease: "power3.out",
-      })
-      .to(
-        words,
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          stagger: 0.03,
-          ease: "power2.out",
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top 75%",
+          toggleActions: "play none none reverse",
         },
-        "-=1"
-      );
+      });
 
-    return () => {
-      split.revert();
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
+      tl.fromTo(
+        ".about-image-wrapper",
+        { scale: 0.8, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 1, ease: "power3.out" }
+      )
+        .fromTo(
+          ".about-title",
+          { y: 30, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.6, ease: "power2.out" },
+          "-=0.5"
+        )
+        .fromTo(
+          ".about-text .line",
+          { y: 20, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            stagger: 0.1,
+            ease: "power2.out",
+          },
+          "-=0.4"
+        )
+        .fromTo(
+          ".stat-card",
+          { y: 30, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.5,
+            stagger: 0.1,
+            ease: "back.out(1.7)",
+          },
+          "-=0.4"
+        );
+    }, sectionRef);
+
+    return () => ctx.revert();
   }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      id="about"
-      className="portfolio-about portfolio-anime-text-container"
-    >
-      <h2 className="portfolio-profile-title">A Little About Me</h2>
-      <div className="portfolio-copy-container">
-        <div className="portfolio-content-wrapper">
-          <div className="portfolio-anime-text">
-            <p ref={textRef}>
-              I operate at the intersection of code and creativity, transforming
-              complex data into elegant, human-centered experiences. As an
-              M.Tech candidate in Big Data Analytics at VIT, I blend the art of
-              design with the science of data to forge sustainable and impactful
-              solutions that truly resonate.
-            </p>
+    <section ref={sectionRef} id="about" className="about-section">
+      <div className="about-container">
+        <div className="about-content">
+          <div className="about-text-col">
+            <h2 className="about-title">
+              About <span className="text-highlight">Me</span>
+            </h2>
+            <div className="about-bio">
+              <p ref={textRef} className="about-text">
+                I am a Full-Stack Developer and M.Tech scholar specializing in Big
+                Data Analytics. With a strong foundation in{" "}
+                <span className="text-highlight">AI/ML integration</span>,{" "}
+                <span className="text-highlight">scalable system architecture</span>
+                , and modern web technologies (Next.js, React, TypeScript), I
+                bridge the gap between complex data science and intuitive user
+                experiences. From architecting freelance solutions to researching
+                LLM quantization, I am driven by a passion for building efficient,
+                impactful software.
+              </p>
+            </div>
+            <div className="about-stats">
+              {stats.map((stat, index) => (
+                <div key={index} className="stat-card">
+                  <div className="stat-icon">{stat.icon}</div>
+                  <div className="stat-info">
+                    <span className="stat-value">{stat.value}</span>
+                    <span className="stat-label">{stat.label}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
-          <div ref={imageRef} className="portfolio-image-container">
-            <Image
-              src="/me.jpeg"
-              alt="Abstract digital art"
-              width={800}
-              height={480}
-              priority
-            />
+          
+          <div className="about-image-col">
+            <div className="about-image-wrapper">
+              <Image
+                src="/me.jpeg"
+                alt="Gautam Krishna"
+                fill
+                className="about-image"
+                priority
+              />
+              <div className="image-accent-border"></div>
+            </div>
           </div>
         </div>
-        <Skills />
+        
+        <div className="about-skills-wrapper">
+           <Skills />
+        </div>
       </div>
     </section>
   );

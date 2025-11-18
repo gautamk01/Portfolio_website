@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import "../style.css";
 import { ThemeProvider } from "@/contexts/ThemeProvider";
+import FlowingLinesBackground from "@/components/FlowingLinesBackground";
 
 export const metadata: Metadata = {
   title: "GK",
@@ -19,7 +20,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <FlowingLinesBackground />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

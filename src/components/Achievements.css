@@ -1,9 +1,9 @@
 /* ===== STICKY CARDS SECTION STYLES ===== */
 .achievements-section-wrapper {
-  position: relative; /* Needed for star positioning */
-  background-color: var(--bg); /* Initial light background */
-  padding: 6rem 0;
-  overflow: hidden;
+  padding: clamp(6rem, 10vh, 8rem) 0;
+  color: var(--fg);
+  position: relative;
+  z-index: 1;
 }
 
 .achievements-title {
