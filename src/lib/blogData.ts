@@ -10,75 +10,50 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
-    slug: "demystifying-react-concurrent-mode",
-    title: "Demystifying React's Concurrent Mode",
-    category: "Technical Deep Dive",
-    date: "October 28, 2025",
+    slug: "gemini-3-0-pro-daily-driver",
+    title: "The Shift: Why Gemini 3.0 Pro Just Became My New Daily Driver",
+    category: "AI & Software Engineering",
+    date: "November 19, 2025",
     excerpt:
-      "A deep-dive into the internals of React's Concurrent Mode, with practical examples and interactive demos to showcase its power.",
-    coverImage: "/p1.png", // Using existing image
+      "For a long time, the hierarchy of coding models felt set in stone. But after my latest round of testing, Gemini 3.0 Pro has dismantled that hierarchy. Here is why it's my new daily driver.",
+    coverImage: "/blogpic/Gemini3.png",
     content: `
-      <p>React's Concurrent Mode is a set of new features that help React apps stay responsive and adjust to the user's device capabilities and network speed.</p>
-      
-      <h3>What is Concurrent Mode?</h3>
-      <p>In standard React (Sync Mode), rendering is a blocking operation. Once it starts, it cannot be interrupted. Concurrent Mode changes this by allowing React to interrupt a long-running render to handle a high-priority event, like a user input.</p>
+      <p>For a long time, the hierarchy of coding models felt set in stone. We had Claude Sonnet for reliability, GPT-4/5 for general reasoning, and everything else trailing behind. But after my latest round of testing, that hierarchy has been dismantled.</p>
+      <p>I have officially switched to <strong>Gemini 3.0 Pro</strong> as my daily driver. It isn't just about better logic; it’s about how it handles the messy, complex reality of actual software engineering.</p>
+      <p>Here is why this model feels like a generational leap for developers.</p>
 
-      <h3>Key Features</h3>
+      <h3>The "Saturation" Problem</h3>
+      <p>You know an AI model is powerful when it breaks your testing methodology. In my previous standard tests ("KingBench"), Gemini 3.0 didn't just pass; it scored a perfect 100%. It essentially "saturated" the benchmark, rendering those questions useless for differentiating top-tier models.</p>
+      <p>To find its breaking point, I had to build entirely new, harder benchmarks—specifically targeting areas where LLMs notoriously struggle: <strong>Game Development (Godot/GDScript)</strong> and <strong>Svelte</strong>.</p>
+
+      <h3>Mastery Over "Niche" Languages</h3>
+      <p>Most models are great at Python or React because the training data is endless. But ask an LLM to write a complex script for the Godot game engine, and you usually get hallucinations.</p>
+      <p>Gemini 3.0 Pro is different.<br/>In my testing, it demonstrated a deep understanding of <strong>GDScript</strong>. When tasked with modifying a basic FPS game—adding step counters, health bars affected by jumping logic—it didn't just guess. It nailed the syntax and the game logic perfectly.</p>
+      <p>It showed similar dominance in <strong>Svelte</strong>. While other models struggle with the specific boilerplate and reactivity of Svelte, Gemini 3.0 produced code that was not just functional, but highly accurate to the framework's best practices.</p>
+
+      <h3>The "Agentic" Difference</h3>
+      <p>The real test of a coding model isn't answering a leetcode question; it's building an app from scratch. I tested Gemini 3.0 inside <strong>Kilo Code</strong> (my current editor of choice) to see if it could handle multi-file agentic tasks.</p>
+
+      <h4>The "Open Code" Breakthrough</h4>
+      <p>There is a specific test I run called the "Open Code" question. Until now, no single standalone model had passed it. The only success I'd seen came from "CodeBuff," which is a complex harness combining multiple models and agents (and costing a lot of money).</p>
+      <p>Gemini 3.0 Pro passed it solo.<br/>It successfully implemented complex SVG commands, adhered to strict UI aesthetics, and allowed for user-input prompts to generate graphics. For a single model to outperform a complex agentic swarm is a massive development.</p>
+
+      <h4>Real-World App Construction</h4>
+      <p>I threw several app ideas at it:</p>
       <ul>
-        <li><strong>Interruptible Rendering:</strong> React can pause work and come back to it later.</li>
-        <li><strong>Concurrent Updates:</strong> React can work on multiple state updates simultaneously.</li>
-        <li><strong>Suspense:</strong> A built-in way to handle loading states for data fetching and code splitting.</li>
+        <li><strong>A Tauri App:</strong> It flawlessly handled image cropping, listing, and annotation.</li>
+        <li><strong>A Movie Tracker:</strong> One-shot generation that was immediately usable.</li>
+        <li><strong>A Go TUI Calculator:</strong> Perfect navigation and calculation logic.</li>
       </ul>
+      <p>While it did stumble on a Nuxt app (a test that Sonnet and GPT-5 also fail), its recovery rate on other tasks is impressive. It sometimes hallucinates in very long contexts, but unlike older models, it listens to corrections and fixes itself quickly.</p>
 
-      <h3>Why it Matters</h3>
-      <p>By prioritizing user interactions, Concurrent Mode makes applications feel significantly smoother, especially on lower-end devices. It essentially allows React to "multitask".</p>
+      <h3>Efficiency is the New Performance</h3>
+      <p>Perhaps the most practical reason for switching is the economy of it. High-reasoning tasks usually burn through API credits rapidly.</p>
+      <p>During my "high reasoning effort" testing, Gemini 3.0 Pro ran the entire suite of complex benchmarks for a fraction of the cost of its competitors. We are talking about a model that is roughly <strong>50% more capable</strong> in my daily life usage than Claude Sonnet, yet significantly cheaper to run.</p>
+
+      <h3>The Verdict</h3>
+      <p>We have finally crossed a threshold. For the first time, we have a model that feels like it truly understands the intent behind the code, specifically in difficult languages like GDScript, while being efficient enough to use for every single pull request.</p>
+      <p>If you are relying on older models or expensive agentic wrappers, it might be time to look at the raw power of Gemini 3.0 Pro. It’s not just winning on the charts; it’s winning in the IDE.</p>
     `,
   },
-  {
-    slug: "building-performant-data-visualizations-d3-react",
-    title: "Building Performant Data Visualizations with D3 and React",
-    category: "Frontend Engineering",
-    date: "September 15, 2025",
-    excerpt:
-      "Exploring techniques for creating smooth, scalable, and interactive data visualizations by combining the strengths of D3.js and React.",
-    coverImage: "/p2.png", // Using existing image
-    content: `
-      <p>Data visualization is a powerful way to communicate complex information. Combining React's component model with D3's calculation capabilities leads to highly performant and maintainable charts.</p>
-
-      <h3>The Strategy</h3>
-      <p>The most common and effective approach is to let <strong>D3 handle the math</strong> and let <strong>React handle the DOM</strong>.</p>
-
-      <h3>Steps to Success</h3>
-      <ol>
-        <li>Use D3 scales and shape generators to calculate paths and coordinates.</li>
-        <li>Pass these calculated values to React components (e.g., <code>&lt;path&gt;</code>, <code>&lt;circle&gt;</code>).</li>
-        <li>Use React's state management to handle interactions like hovering and filtering.</li>
-      </ol>
-
-      <h3>Performance Tips</h3>
-      <p>For large datasets, consider using HTML5 Canvas instead of SVG, or leverage libraries like <code>react-spring</code> for smooth animations.</p>
-    `,
-  },
-  {
-    slug: "guide-full-stack-development-nextjs",
-    title: "A Guide to Full-Stack Development with Next.js",
-    category: "Web Development",
-    date: "August 02, 2025",
-    excerpt:
-      "From server-side rendering to API routes, this guide covers everything you need to know to build and deploy a modern web app with Next.js.",
-    coverImage: "/hack.jpeg", // Using existing image
-    content: `
-      <p>Next.js has revolutionized the React ecosystem by providing a zero-config framework for building full-stack applications.</p>
-
-      <h3>Core Concepts</h3>
-      <ul>
-        <li><strong>Pages & Routing:</strong> File-system based routing makes navigation intuitive.</li>
-        <li><strong>Data Fetching:</strong> Choose between Static Generation (SSG), Server-Side Rendering (SSR), and Incremental Static Regeneration (ISR).</li>
-        <li><strong>API Routes:</strong> Build backend endpoints directly within your Next.js app using the <code>/pages/api</code> directory.</li>
-      </ul>
-
-      <h3>Deployment</h3>
-      <p>Deploying to Vercel is seamless, offering features like automatic HTTPS, global CDN, and preview deployments for every git push.</p>
-    `,
-  },
-];
+]

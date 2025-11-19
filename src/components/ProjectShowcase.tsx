@@ -44,6 +44,62 @@ const projects = [
     ],
   },
   {
+    name: "Al-Shurooq Printing Press Workflow Management System",
+    img: "/Project2/p1.png",
+    desc: "A comprehensive, full-stack web application for managing printing press operations, customer orders, workflow tracking, and business analytics.",
+    liveUrl: "",
+    gitUrl: "",
+    gallery: [
+      {
+        img: "/Project2/p1.png",
+        caption: "Al-Shurooq Printing Press Workflow Management System Logo",
+      },
+      {
+        img: "/Project2/p2.png",
+        caption: "Dashboard showing real-time analytics",
+      },
+      {
+        img: "/Project2/p3.png",
+        caption: "Order Management Interface",
+      },
+      {
+        img: "/Project2/p4.png",
+        caption: "Order Management Interface",
+      },
+      {
+        img: "/Project2/p5.png",
+        caption: "Order Management Interface",
+      },
+    ],
+    techStack: [
+      "React",
+      "TypeScript",
+      "Vite",
+      "React Router",
+      "TanStack Query",
+      "React Hook Form",
+      "Zod",
+      "Tailwind CSS",
+      "Shadcn/UI",
+      "Radix UI",
+      "Lucide React",
+      "Recharts",
+      "Sonner",
+      "Node.js",
+      "Express.js",
+      "PostgreSQL",
+      "JWT",
+      "Bcrypt",
+      "PDFKit",
+      "Express Validator",
+      "Cloudflare Tunnel",
+      "QNAP Container Station",
+      "Vercel",
+      "ESLint",
+      "Prettier",
+    ],
+  },
+  {
     name: "Bloom24",
     img: "/p1.png",
     desc: "An e-commerce platform for a floral shop, featuring a vibrant design and easy-to-use interface.",
@@ -183,20 +239,24 @@ const ProjectShowcase = () => {
                     >
                       View Details
                     </button>
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      View Live
-                    </a>
-                    <a
-                      href={project.gitUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      GitHub
-                    </a>
+                                        {project.liveUrl && project.liveUrl !== "" && (
+                                          <a
+                                            href={project.liveUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                          >
+                                            View Live
+                                          </a>
+                                        )}
+                                        {project.gitUrl && project.gitUrl !== "" && (
+                                          <a
+                                            href={project.gitUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                          >
+                                            GitHub
+                                          </a>
+                                        )}
                   </div>
                 </div>
               </div>

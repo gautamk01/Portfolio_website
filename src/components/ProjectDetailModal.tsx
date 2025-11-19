@@ -3,8 +3,41 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import gsap from "gsap";
-import { ChevronLeft, ChevronRight, Database, Video, Workflow, ShieldCheck, Cpu } from "lucide-react";
-import { SiNextdotjs, SiTypescript, SiPostgresql, SiTailwindcss, SiOpenai, SiTrpc } from "react-icons/si";
+import {
+  ChevronLeft,
+  ChevronRight,
+  Database,
+  Video,
+  Workflow,
+  ShieldCheck,
+  Cpu,
+  FileText,
+  Lock,
+  Server,
+} from "lucide-react";
+import {
+  SiNextdotjs,
+  SiTypescript,
+  SiPostgresql,
+  SiTailwindcss,
+  SiOpenai,
+  SiTrpc,
+  SiReact,
+  SiVite,
+  SiReactrouter,
+  SiReactquery,
+  SiReacthookform,
+  SiZod,
+  SiShadcnui,
+  SiNodedotjs,
+  SiExpress,
+  SiJsonwebtokens,
+  SiCloudflare,
+  SiVercel,
+  SiPrettier,
+  SiEslint,
+  SiDocker,
+} from "react-icons/si";
 import "./ProjectDetailModal.css";
 
 export type Project = {
@@ -23,6 +56,7 @@ type Props = {
 };
 
 const getTechIcon = (tech: string) => {
+  // Normalize string for easier matching if needed, but specific cases work fine
   switch (tech) {
     case "Next.js":
       return <SiNextdotjs title="Next.js" />;
@@ -44,8 +78,54 @@ const getTechIcon = (tech: string) => {
       return <SiOpenai title="OpenAI" />;
     case "Tailwind CSS":
       return <SiTailwindcss title="Tailwind CSS" />;
+    case "React":
+    case "React 18.3.1":
+      return <SiReact title="React" />;
+    case "Vite":
+      return <SiVite title="Vite" />;
+    case "React Router":
+    case "React Router v6":
+      return <SiReactrouter title="React Router" />;
+    case "TanStack Query":
+      return <SiReactquery title="TanStack Query" />;
+    case "React Hook Form":
+      return <SiReacthookform title="React Hook Form" />;
+    case "Zod":
+      return <SiZod title="Zod" />;
+    case "Shadcn/UI":
+      return <SiShadcnui title="Shadcn/UI" />;
+    case "Node.js":
+      return <SiNodedotjs title="Node.js" />;
+    case "Express.js":
+      return <SiExpress title="Express.js" />;
+    case "JWT":
+      return <SiJsonwebtokens title="JWT" />;
+    case "Cloudflare Tunnel":
+      return <SiCloudflare title="Cloudflare" />;
+    case "Vercel":
+      return <SiVercel title="Vercel" />;
+    case "ESLint":
+      return <SiEslint title="ESLint" />;
+    case "Prettier":
+      return <SiPrettier title="Prettier" />;
+    case "QNAP Container Station":
+      return <SiDocker title="Docker/Container Station" />;
+    case "PDFKit":
+      return <FileText title="PDFKit" />;
+    case "Bcrypt":
+      return <Lock title="Bcrypt" />;
+    case "Radix UI":
+      return <Cpu title="Radix UI" />; // Radix doesn't have a standard simple icon yet, generic Cpu
+    case "Lucide React":
+      return <Cpu title="Lucide React" />;
+    case "Recharts":
+      return <Cpu title="Recharts" />;
+    case "Sonner":
+      return <Cpu title="Sonner" />;
+    case "Express Validator":
+      return <ShieldCheck title="Express Validator" />;
     default:
-      return <Cpu />;
+      return <Cpu title={tech} />;
   }
 };
 
@@ -179,20 +259,24 @@ const ProjectDetailModal = ({ project, onClose }: Props) => {
         )}
 
         <div className="project-links">
-          <a
-            href={project.liveUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            View Live
-          </a>
-          <a
-            href={project.gitUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            GitHub
-          </a>
+          {project.liveUrl && project.liveUrl !== "" && (
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View Live
+            </a>
+          )}
+          {project.gitUrl && project.gitUrl !== "" && (
+            <a
+              href={project.gitUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GitHub
+            </a>
+          )}
         </div>
       </div>
     </div>
