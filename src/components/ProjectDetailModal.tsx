@@ -13,7 +13,6 @@ import {
   Cpu,
   FileText,
   Lock,
-  Server,
 } from "lucide-react";
 import {
   SiNextdotjs,
@@ -111,21 +110,21 @@ const getTechIcon = (tech: string) => {
     case "QNAP Container Station":
       return <SiDocker title="Docker/Container Station" />;
     case "PDFKit":
-      return <FileText title="PDFKit" />;
+      return <FileText />;
     case "Bcrypt":
-      return <Lock title="Bcrypt" />;
+      return <Lock />;
     case "Radix UI":
-      return <Cpu title="Radix UI" />; // Radix doesn't have a standard simple icon yet, generic Cpu
+      return <Cpu />; // Radix doesn't have a standard simple icon yet, generic Cpu
     case "Lucide React":
-      return <Cpu title="Lucide React" />;
+      return <Cpu />;
     case "Recharts":
-      return <Cpu title="Recharts" />;
+      return <Cpu />;
     case "Sonner":
-      return <Cpu title="Sonner" />;
+      return <Cpu />;
     case "Express Validator":
-      return <ShieldCheck title="Express Validator" />;
+      return <ShieldCheck />;
     default:
-      return <Cpu title={tech} />;
+      return <Cpu />;
   }
 };
 
